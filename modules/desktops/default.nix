@@ -1,0 +1,4 @@
+[
+  ./qtile
+  ./hyprland
+]
