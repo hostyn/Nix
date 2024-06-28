@@ -50,4 +50,23 @@ in
     ];
   };
 
+  finn = lib.nixosSystem {
+    inherit system;
+    specialArgs = {
+      inherit inputs system unstable vars;
+      host = {
+        hostName = "finn";
+      };
+    };
+    modules = [
+      ./finn
+      ./configuration.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+    ];
+  };
 }
