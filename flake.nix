@@ -3,13 +3,15 @@
 
   inputs =
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11"; # Nix Packages (Default)
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05"; # Nix Packages (Default)
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; # Unstable Nix Packages
       # nixos-hardware.url = "github:nixos/nixos-hardware/master"; # Hardware Specific Configurations
 
+      nix-colors.url = "github:misterio77/nix-colors";
+
       # User Environment Manager
       home-manager = {
-        url = "github:nix-community/home-manager/release-23.11";
+        url = "github:nix-community/home-manager/release-24.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
@@ -27,7 +29,7 @@
 
       # # Neovim
       # nixvim = {
-      #   url = "github:nix-community/nixvim/nixos-23.11";
+      #   url = "github:nix-community/nixvim/nixos-24.05";
       #   inputs.nixpkgs.follows = "nixpkgs";
       # };
 
@@ -75,7 +77,7 @@
       # };
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: # Function telling flake which inputs to use
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, ... }: # Function telling flake which inputs to use
     let
       # Variables Used In Flake
       vars = {
@@ -85,12 +87,13 @@
         editor = "nvim";
         visualeditor = "code";
       };
+      palette = nix-colors.lib.schemeFromYAML "dracula" (builtins.readFile ./modules/theming/themes/dracula.yaml);
     in
     {
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager vars; # Inherit inputs
+          inherit inputs nixpkgs nixpkgs-unstable home-manager vars palette; # Inherit inputs
         }
       );
     };

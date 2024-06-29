@@ -22,7 +22,7 @@
 #           └─ default.nix
 #
 
-{ pkgs, unstable, inputs, vars, ... }:
+{ pkgs, unstable, inputs, vars, host, ... }:
 
 let
   terminal = pkgs.${vars.terminal};
@@ -47,6 +47,8 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" "camera" "networkmanager" "lp" "scanner" ];
   };
+
+  networking.hostName = host.hostName;
 
   time.timeZone = "Europe/Madrid";
   i18n = {
@@ -117,7 +119,7 @@ in
       vscode
       wget
       killall
-
+      kitty
       nixpkgs-fmt
     ] ++
     (with unstable; [
@@ -171,12 +173,12 @@ in
     #   enable = true;
     #   channel = "https://nixos.org/channels/nixos-unstable";
     # };
-    stateVersion = "23.11";
+    stateVersion = "24.05";
   };
 
   home-manager.users.${vars.user} = {
     home = {
-      stateVersion = "23.11";
+      stateVersion = "24.05";
     };
     programs = {
       home-manager.enable = true;
