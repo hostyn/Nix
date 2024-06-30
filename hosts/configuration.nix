@@ -100,7 +100,7 @@ in
 
   fonts.packages = with pkgs; [
     (nerdfonts.override {
-      fonts = [ "Mononoki" "UbuntuMono" "Ubuntu" ];
+      fonts = [ "Mononoki" "UbuntuMono" "Ubuntu" "JetBrainsMono" ];
     })
   ];
 

@@ -9,7 +9,7 @@
 #           └─ default.nix
 #
 
-{ inputs, nixpkgs, nixpkgs-unstable, home-manager, vars, palette, ... }:
+{ inputs, nixpkgs, nixpkgs-unstable, home-manager, vars, palette, nix-colors, ... }:
 
 let
   system = "x86_64-linux";
@@ -31,7 +31,7 @@ in
   zeus = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars palette;
+      inherit inputs system unstable vars palette nix-colors;
       host = {
         hostName = "zeus";
       };
@@ -53,7 +53,7 @@ in
   finn = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars palette;
+      inherit inputs system unstable vars palette nix-colors;
       host = {
         hostName = "finn";
       };

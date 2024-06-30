@@ -31,7 +31,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager vars palette; # Inherit inputs
+          inherit inputs nixpkgs nixpkgs-unstable home-manager vars palette nix-colors; # Inherit inputs
         }
       );
     };
