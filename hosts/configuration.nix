@@ -71,9 +71,9 @@ in
     keyMap = "es";
   };
 
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "es";
-    xkbVariant = "";
+    variant = "";
   };
 
   security = {

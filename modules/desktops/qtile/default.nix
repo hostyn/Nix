@@ -2,7 +2,7 @@
 
 {
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.windowManager.qtile.enable = true;
 
   home-manager.users.${vars.user} = {
