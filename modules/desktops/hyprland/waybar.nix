@@ -21,12 +21,47 @@
           ];
 
           modules-right = [
+            "mpris"
             "cpu"
             "memory"
+            "network"
             "disk"
+            "pulseaudio"
             "tray"
             "clock"
           ];
+
+          mpris = {
+            interval = 1;
+            format = "{player_icon} {title} - {artist} {status_icon}";
+            status-icons = {
+              playing = " ";
+              paused = " ";
+              stopped = " ";
+            };
+            player-icons = {
+              spotify = " ";
+              brave = " ";
+              default = " ";
+            };
+          };
+
+          pulseaudio = {
+            format = "{icon} {volume}%";
+            tooltip-format = "{desc} - {volume}%";
+            format-icons = {
+              default = [ " " " " " " ];
+            };
+            format-muted = "  {volume}%";
+            on-click = "pavucontrol";
+            scrol-step = 2;
+          };
+
+          network = {
+            format = "  {bandwidthTotalBytes}";
+            interval = 2;
+            tooltip-format = "{ifname} - {ipaddr}\n{bandwidthDownBytes} ↓ {bandwidthUpBytes} ↑";
+          };
 
           disk = {
             format = "  {percentage_used}%";
@@ -47,24 +82,36 @@
             icon-size = 12;
           };
 
+          clock = {
+            interval = 2;
+            format-alt = "{:%A %d %B %Y}";
+            tooltip-format = "{:%A %d %B %Y}";
+          };
+
           "hyprland/workspaces" = {
             all-outputs = true;
             move-to-monitor = true;
             format = "{icon}";
             format-icons = {
-              "1" = "";
-              "2" = "";
-              "3" = "";
-              "4" = "";
-              "5" = "";
-              "6" = "";
-              "7" = "";
-              "8" = "";
+              "1" = " ";
+              "2" = " ";
+              "3" = " ";
+              "4" = " ";
+              "5" = " ";
+              "6" = " ";
+              "7" = " ";
+              "8" = " ";
             };
             persistent-workspaces = {
               "*" = [ 1 2 3 4 5 6 7 8 ];
             };
           };
+
+          "hyprland/window" = {
+            interval = 2;
+          };
+
+
         };
       };
 
@@ -75,8 +122,20 @@
           border-radius: 10px;
         }
 
-        #clock, #tray, #cpu, #memory, #disk {
+        #clock, #tray, #cpu, #memory, #disk, #network, #pulseaudio, #mpris {
           padding-right: 15px;
+        }
+
+        #mpris {
+          color: #${palette.base06};
+        }
+
+        #pulseaudio {
+          color: #${palette.base0A};
+        }
+
+        #network {
+          color: #${palette.base08};
         }
 
         #cpu {

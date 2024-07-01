@@ -14,6 +14,7 @@
   boot.loader.grub.useOSProber = true;
 
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.theme = "chili";
 
   hardware = {
     opengl = {

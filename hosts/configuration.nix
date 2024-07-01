@@ -121,6 +121,8 @@ in
       killall
       kitty
       nixpkgs-fmt
+      pavucontrol
+      sddm-chili-theme
     ] ++
     (with unstable; [
     ]);
@@ -131,6 +133,7 @@ in
   };
 
   hardware.pulseaudio.enable = false;
+
   services = {
     # printing = {
     #   enable = true;

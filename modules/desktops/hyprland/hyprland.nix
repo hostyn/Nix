@@ -16,7 +16,7 @@
       enable = true;
       settings = {
         general = {
-          lock_cmd = "pidof hyprlock || hyprlock";
+          lock_cmd = "hyprlock";
           before_sleep_cmd = "loginctl lock-session";
           after_sleep_cmd = "hyprctl dispatch dpms on";
         };
@@ -121,9 +121,9 @@
         # AUTO START
         exec-once = [
           "hyprpaper"
+          "hypridle"
           "waybar"
           "udiskie -t"
-          "hypridle"
         ];
 
         # KEY BINDINGS
@@ -135,6 +135,18 @@
             "$mod, RETURN, exec, ${vars.terminal}"
             "$mod, G, exec, brave"
             "$mod, V, exec, code"
+            "$mod, M, exec, wofi --show drun"
+
+            ", XF86AudioPlay, exec, playerctl play-pause"
+            ", XF86AudioStop, exec, playerctl -a pause"
+            ", XF86AudioNext, exec, playerctl next"
+            ", XF86AudioPrev, exec, playerctl previous"
+
+            ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+            ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+            "$mod, L, exec, loginctl lock-session"
 
             "$mod, E, focusworkspaceoncurrentmonitor, 1"
             "$mod, R, focusworkspaceoncurrentmonitor, 2"
