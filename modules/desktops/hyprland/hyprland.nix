@@ -101,6 +101,15 @@
             halign = "center";
             valign = "center";
           }
+
+          {
+            text = "cmd[update:1000] echo \"󰎇  $(playerctl metadata -a --format '{{ status }} {{ title }} - {{ artist }}' | grep Playing | cut -d' ' -f2- | head -n 1) 󰎇 \"";
+            font_size = 16;
+            font_family = "JetBrains Mono Nerd Font Mono";
+            position = "0, 0";
+            halign = "center";
+            valign = "bottom";
+          }
         ];
 
         # TODO: Add currently playing song
@@ -146,6 +155,7 @@
             ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
             ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
+            "$mod SHIFT, Delete, exec, $HOME/.config/scripts/powermenu"
             "$mod, L, exec, loginctl lock-session"
 
             "$mod, E, focusworkspaceoncurrentmonitor, 1"

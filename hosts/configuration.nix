@@ -122,7 +122,8 @@ in
       kitty
       nixpkgs-fmt
       pavucontrol
-      sddm-chili-theme
+      spotify
+      python3
     ] ++
     (with unstable; [
     ]);

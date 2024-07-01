@@ -2,9 +2,8 @@
 
 {
   home-manager.users.${vars.user} = {
-    home.file.".config/scripts" = {
-      source = ./scripts;
-      recursive = true;
+    home.file.".config/scripts/powermenu" = {
+      source = ./scripts/powermenu;
       executable = true;
     };
   };
