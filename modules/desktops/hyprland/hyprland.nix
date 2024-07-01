@@ -7,7 +7,8 @@
 
   environment.systemPackages = with pkgs; [
     udiskie
-    brightnessctl
+    playerctl
+    spotify
   ];
 
   home-manager.users.${vars.user} = {
@@ -52,7 +53,6 @@
           # TIME
           {
             text = "cmd[update:1000] date +%H:%M";
-            color = "$foreground";
             font_size = 64;
             font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
             position = "0, 64";
@@ -62,7 +62,6 @@
           # DATE
           {
             text = "cmd[update:1000] date +\"%A %d de %B de %Y\" | awk '{print toupper(substr($1,1,1)) substr($1,2), $2, $3, toupper(substr($4,1,1)) substr($4,2), $5, $6}'";
-            color = "$foreground";
             font_size = 18;
             font_family = "JetBrains Mono Nerd Font Mono";
             position = "0, 46";
@@ -72,7 +71,6 @@
 
           {
             text = "Hola 👋, $USER";
-            color = "$foreground";
             font_size = 16;
             font_family = "JetBrains Mono Nerd Font Mono";
             position = "0, 0";
