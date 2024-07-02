@@ -104,15 +104,13 @@
 
           {
             text = "cmd[update:1000] echo \"󰎇  $(playerctl metadata -a --format '{{ status }} {{ title }} - {{ artist }}' | grep Playing | cut -d' ' -f2- | head -n 1) 󰎇 \"";
-            font_size = 16;
+            font_size = 12;
             font_family = "JetBrains Mono Nerd Font Mono";
             position = "0, 0";
             halign = "center";
             valign = "bottom";
           }
         ];
-
-        # TODO: Add currently playing song
       };
     };
 

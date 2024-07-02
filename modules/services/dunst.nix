@@ -1,4 +1,4 @@
-{ vars, ... }:
+{ vars, palette, ... }:
 
 {
   home-manager.users.${vars.user} = {
@@ -6,13 +6,28 @@
       enable = true;
       settings = {
         global = {
-          width = 200;
+          width = 400;
           origin = "bottom-center";
-          progress_bar_min_width = 200;
-          progress_bar_max_width = 200;
-          progress_bar_corner_radius = 5;
           alignment = "center";
+          corner_radius = 10;
+          corners = "all";
+          frame_width = 0; # Border width
+          font = "JetBrains Mono Nerd Font Mono 10";
+        };
 
+        urgency_low = {
+          background = "#${palette.base00}";
+          foreground = "#${palette.base05}";
+        };
+
+        urgency_normal = {
+          background = "#${palette.base01}";
+          foreground = "#${palette.base05}";
+        };
+
+        urgency_critical = {
+          background = "#8C1D18";
+          foreground = "#F9DEDC";
         };
       };
     };

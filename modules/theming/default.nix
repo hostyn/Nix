@@ -12,4 +12,5 @@
 
 [
   ./theming.nix
+  ./wallpapers.nix
 ]
