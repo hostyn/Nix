@@ -7,7 +7,6 @@
 {
   home-manager.users.${vars.user} = {
     home = {
-      file.".config/wall.jpg".source = ./wall.jpg;
       pointerCursor = {
         gtk.enable = true;
         name = "macOS-BigSur";

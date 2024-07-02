@@ -8,112 +8,11 @@
   environment.systemPackages = with pkgs; [
     udiskie
     playerctl
-    hypridle
+    hyprpicker
+    wl-clipboard
   ];
 
   home-manager.users.${vars.user} = {
-    services.hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          lock_cmd = "hyprlock";
-          before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-        };
-
-        listener = [
-          {
-            timeout = 1800;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
-
-          {
-            timeout = 900;
-            on-timeout = "loginctl lock-session";
-          }
-        ];
-      };
-    };
-
-    programs.hyprlock = {
-      enable = true;
-      settings = {
-        background = {
-          # TODO: Add wallpaper the nix way
-          path = "/home/hostyn/Pictures/wp.jpg";
-          blur_passes = 3;
-          contrast = 0.8916;
-          brightness = 0.8172;
-          vibrancy = 0.1696;
-          vibrancy_darkness = 0.0;
-        };
-
-        general = {
-          no_fade_in = false;
-          grace = 0;
-          disable_loading_bar = false;
-          hide_cursor = true;
-          ignore_empty_password = true;
-        };
-
-        input-field = {
-          valign = "center";
-          halign = "center";
-          size = "200, 40";
-          dots-center = true;
-          position = "0, -64";
-          rounding = 5;
-          outline_thickness = 0;
-          inner_color = "rgba(${nix-colors.lib.conversions.hexToRGBString ", " palette.base00}, 0.5)";
-          font_color = "rgba(${nix-colors.lib.conversions.hexToRGBString ", " palette.base07}, 0.5)";
-          check_color = "rgba(${nix-colors.lib.conversions.hexToRGBString ", " palette.base0E}, 0.5)";
-          fail_color = "rgba(207, 53, 46, 0.5)";
-          placeholder_text = "";
-        };
-
-        # TIME
-        label = [
-          # TIME
-          {
-            text = "cmd[update:1000] date +%H:%M";
-            font_size = 64;
-            font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
-            position = "0, 64";
-            halign = "center";
-            valign = "center";
-          }
-          # DATE
-          {
-            text = "cmd[update:1000] date +\"%A %d de %B de %Y\" | awk '{print toupper(substr($1,1,1)) substr($1,2), $2, $3, toupper(substr($4,1,1)) substr($4,2), $5, $6}'";
-            font_size = 18;
-            font_family = "JetBrains Mono Nerd Font Mono";
-            position = "0, 46";
-            halign = "center";
-            valign = "center";
-          }
-
-          {
-            text = "Hola 👋, $USER";
-            font_size = 16;
-            font_family = "JetBrains Mono Nerd Font Mono";
-            position = "0, 0";
-            halign = "center";
-            valign = "center";
-          }
-
-          {
-            text = "cmd[update:1000] echo \"󰎇  $(playerctl metadata -a --format '{{ status }} {{ title }} - {{ artist }}' | grep Playing | cut -d' ' -f2- | head -n 1) 󰎇 \"";
-            font_size = 12;
-            font_family = "JetBrains Mono Nerd Font Mono";
-            position = "0, 0";
-            halign = "center";
-            valign = "bottom";
-          }
-        ];
-      };
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -131,6 +30,7 @@
           "hypridle"
           "waybar"
           "udiskie -t"
+          "hyprctl dispatch focusmonitor 1"
         ];
 
         # KEY BINDINGS
@@ -138,24 +38,34 @@
 
         bind =
           [
+            # WINDOW KEYS
             "$mod, W, killactive"
+
+            # APPLICATION KEYS
             "$mod, RETURN, exec, ${vars.terminal}"
             "$mod, G, exec, brave"
             "$mod, V, exec, code"
             "$mod, M, exec, wofi --show drun"
 
+            # ACTION KEYS
+            "$mod Alt_L, P, exec, hyprpicker -ar | xargs -I {} dunstify \"Color copied to clipboard\" \"<span background='{}'>{}</span>\""
+
+            # MEDIA KEYS
             ", XF86AudioPlay, exec, playerctl play-pause"
             ", XF86AudioStop, exec, playerctl -a pause"
             ", XF86AudioNext, exec, playerctl next"
             ", XF86AudioPrev, exec, playerctl previous"
 
+            # VOLUME KEYS
             ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
             ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
             ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
+            # SESSION KEYS
             "$mod SHIFT, Delete, exec, $HOME/.config/scripts/powermenu"
             "$mod, L, exec, loginctl lock-session"
 
+            # WORKSPACE KEYS
             "$mod, E, focusworkspaceoncurrentmonitor, 1"
             "$mod, R, focusworkspaceoncurrentmonitor, 2"
             "$mod, T, focusworkspaceoncurrentmonitor, 3"
@@ -174,6 +84,7 @@
             "$mod SHIFT, O, movetoworkspace, 7"
             "$mod SHIFT, P, movetoworkspace, 8"
 
+            # MONITOR KEYS
             "$mod, comma, focusmonitor, 0"
             "$mod, period, focusmonitor, 1"
           ];

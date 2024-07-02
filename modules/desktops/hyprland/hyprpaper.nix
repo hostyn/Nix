@@ -11,10 +11,10 @@
       enable = true;
       settings = {
         preload =
-          [ "/home/hostyn/Pictures/wp.jpg" ];
+          [ "$HOME/.config/wallpapers/car.jpg" ];
         wallpaper = [
-          "DP-1,/home/hostyn/Pictures/wp.jpg"
-          "HDMI-A-1,/home/hostyn/Pictures/wp.jpg"
+          "DP-1,$HOME/.config/wallpapers/car.jpg"
+          "HDMI-A-1,$HOME/.config/wallpapers/car.jpg"
         ];
       };
     };

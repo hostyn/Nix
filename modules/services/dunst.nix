@@ -1,7 +1,11 @@
-{ vars, palette, ... }:
+{ vars, palette, pkgs, ... }:
 
 {
   home-manager.users.${vars.user} = {
+    home.packages = with pkgs; [
+      libnotify
+    ];
+
     services.dunst = {
       enable = true;
       settings = {
@@ -13,6 +17,7 @@
           corners = "all";
           frame_width = 0; # Border width
           font = "JetBrains Mono Nerd Font Mono 10";
+          markup = "full";
         };
 
         urgency_low = {

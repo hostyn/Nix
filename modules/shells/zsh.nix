@@ -14,6 +14,17 @@
 
   home-manager.users.${vars.user} =
     {
+      home.packages = with pkgs; [
+        bat
+        eza
+        dust
+        duf
+        jq
+        bottom
+        glances
+        dogdns
+      ];
+
       programs.starship = {
         enable = true;
         enableZshIntegration = true;
@@ -200,6 +211,19 @@
 
         shellAliases = {
           vi = "nvim";
+          cat = "bat";
+          catn = "/usr/bin/env cat";
+          ls = "eza -ls name --group-directories-first";
+          l = "eza -ls name --group-directories-first";
+          la = "eza -las name --group-directories-first";
+          lt = "eza -lTs name --group-directories-first";
+          lta = "eza -laTs name --group-directories-first";
+          lat = "eza -laTs name --group-directories-first";
+          df = "duf";
+          du = "dust -Brn 20";
+          top = "galnces";
+          htop = "btm";
+          dig = "dog";
         };
 
         plugins = [
