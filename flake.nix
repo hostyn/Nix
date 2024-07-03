@@ -21,7 +21,7 @@
       vars = {
         user = "hostyn";
         location = "$HOME/.setup";
-        terminal = "alacritty";
+        terminal = "kitty";
         editor = "nvim";
         visualeditor = "code";
       };

@@ -61,25 +61,25 @@
             format = "  {bandwidthTotalBytes}";
             interval = 2;
             tooltip-format = "{ifname} - {ipaddr}\n{bandwidthDownBytes} ↓ {bandwidthUpBytes} ↑";
-            on-click = "alacritty -e btm";
+            on-click = "kitty btm";
           };
 
           disk = {
             format = "  {percentage_used}%";
-            on-click = "alacritty -e btm";
+            on-click = "kitty btm";
           };
 
           memory = {
             format = "  {percentage}%";
             interval = 2;
             tooltip-format = "{used:0.1f}GiB / {total:0.1f}GiB";
-            on-click = "alacritty -e btm";
+            on-click = "kitty btm";
           };
 
           cpu = {
             format = "  {usage}%";
             interval = 2;
-            on-click = "alacritty -e btm";
+            on-click = "kitty btm";
           };
 
           tray = {
