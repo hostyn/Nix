@@ -6,13 +6,30 @@
   services.udisks2.enable = true;
 
   environment.systemPackages = with pkgs; [
-    udiskie
-    playerctl
-    hyprpicker
-    wl-clipboard
+    udiskie # Udisks2 tray icon
+    playerctl # Media player control
+    hyprpicker # Color picker
+    wl-clipboard # Clipboard manager - needed for hyprpicker
+    grim # Screenshot tool
+    slurp # Region selection tool - needed for grim
   ];
 
   home-manager.users.${vars.user} = {
+    xdg.desktopEntries = {
+      feh = {
+        name = "Feh";
+        genericName = "Image viewer";
+        comment = "Image viewer and cataloguer";
+        exec = "feh -Z -. -g 1280x720 --start-at %u";
+        terminal = false;
+        type = "Application";
+        icon = "feh";
+        categories = [ "Graphics" "2DGraphics" "Viewer" ];
+        mimeType = [ "image/bmp" "image/gif" "image/jpeg" "image/jpg" "image/pjpeg" "image/png" "image/tiff" "image/webp" "image/x-bmp" "image/x-pcx" "image/x-png" "image/x-portable-anymap" "image/x-portable-bitmap" "image/x-portable-graymap" "image/x-portable-pixmap" "image/x-tga" "image/x-xbitmap" "image/heic" ];
+        noDisplay = true;
+      };
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -49,6 +66,8 @@
 
             # ACTION KEYS
             "$mod Alt_L, P, exec, hyprpicker -ar | xargs -I {} dunstify \"Color copied to clipboard\" \"<span background='{}'>{}</span>\""
+            ", Print, exec, grim -o $(hyprctl activeworkspace -j | jq -r '.monitor') $HOME/Pictures/$(date +\"Screenshot_%Y-%m-%d_%H.%M.%S.%s\") && dunstify 'Screnshot saved' 'Saved in ~/Pictures'"
+            "Ctrl_L, Print, exec, grim -g \"$(slurp)\" $HOME/Pictures/$(date +\"Screenshot_%Y-%m-%d_%H.%M.%S.%s\") && dunstify 'Screnshot saved' 'Saved in ~/Pictures'"
 
             # MEDIA KEYS
             ", XF86AudioPlay, exec, playerctl play-pause"
@@ -87,7 +106,18 @@
             # MONITOR KEYS
             "$mod, comma, focusmonitor, 0"
             "$mod, period, focusmonitor, 1"
+
+            "$mod, F, togglefloating,"
           ];
+
+        bindm = [
+          "$mod, mouse:272, movewindow"
+          "$mod, mouse:273, resizewindow"
+        ];
+
+        windowrulev2 = [
+          "float, class:(feh)"
+        ];
 
         general = {
           gaps_in = 5;

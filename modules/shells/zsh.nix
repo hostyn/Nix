@@ -23,6 +23,7 @@
         bottom
         glances
         dogdns
+        unzip
       ];
 
       programs.starship = {

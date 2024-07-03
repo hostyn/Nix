@@ -119,7 +119,6 @@ in
       vscode
       wget
       killall
-      kitty
       nixpkgs-fmt
       pavucontrol
       spotify
