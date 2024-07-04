@@ -123,6 +123,7 @@ in
       pavucontrol
       spotify
       python3
+      feh
     ] ++
     (with unstable; [
     ]);
@@ -194,9 +195,9 @@ in
         defaultApplications = {
           "image/jpeg" = [ "feh.desktop" ];
           "image/png" = [ "feh.desktop" ];
-          "text/plain" = "code.desktop";
-          "text/html" = "code.desktop";
-          "text/csv" = "code.desktop";
+          "text/plain" = "codium.desktop";
+          "text/html" = "codium.desktop";
+          "text/csv" = "codium.desktop";
           "application/pdf" = [ "brave-browser.desktop" "firefox.desktop" ];
           "application/zip" = "org.gnome.FileRoller.desktop";
           "application/x-tar" = "org.gnome.FileRoller.desktop";
@@ -213,6 +214,54 @@ in
           "video/mp4" = "mpv.desktop";
           "video/x-matroska" = "mpv.desktop";
           "inode/directory" = "pcmanfm.desktop";
+        };
+      };
+
+      desktopEntries = {
+        feh = {
+          name = "Feh";
+          genericName = "Image viewer";
+          comment = "Image viewer and cataloguer";
+          exec = "${pkgs.feh}/bin/feh -Z -. -g 1280x720 --start-at %u";
+          terminal = false;
+          type = "Application";
+          icon = "feh";
+          categories = [ "Graphics" "2DGraphics" "Viewer" ];
+          mimeType = [ "image/bmp" "image/gif" "image/jpeg" "image/jpg" "image/pjpeg" "image/png" "image/tiff" "image/webp" "image/x-bmp" "image/x-pcx" "image/x-png" "image/x-portable-anymap" "image/x-portable-bitmap" "image/x-portable-graymap" "image/x-portable-pixmap" "image/x-tga" "image/x-xbitmap" "image/heic" ];
+          noDisplay = true;
+        };
+
+        codium = {
+          categories = [ "Utility" "TextEditor" "Development" "IDE" ];
+          comment = "Code Editing. Redefined.";
+          exec = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret %F";
+          genericName = "Text Editor";
+          icon = "vscodium";
+          mimeType = [ "text/plain" "inode/directory" ];
+          name = "VSCodium";
+          type = "Application";
+          settings = {
+            Keywords = "vscode";
+            StartupWMClass = "vscodium";
+            Version = "1.4";
+            StartupNotify = "true";
+          };
+        };
+
+        brave-browser = {
+          name = "Brave Web Browser";
+          genericName = "Web Browser";
+          comment = "Access the Internet";
+          exec = "${pkgs.brave}/bin/brave --password-store=gnome-libsecret %U";
+          terminal = false;
+          icon = "brave-browser";
+          type = "Application";
+          categories = [ "Network" "WebBrowser" ];
+          mimeType = [ "application/pdf" "application/rdf+xml" "application/rss+xml" "application/xhtml+xml" "application/xhtml_xml" "application/xml" "image/gif" "image/jpeg" "image/png" "image/webp" "text/html" "text/xml" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/ipfs" "x-scheme-handler/ipns" ];
+          settings = {
+            Version = "1.0";
+            StartupNotify = "true";
+          };
         };
       };
     };

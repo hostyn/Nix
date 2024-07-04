@@ -1,4 +1,4 @@
 [
-  ./qtile
+  # ./qtile
   ./hyprland
 ]

@@ -15,21 +15,6 @@
   ];
 
   home-manager.users.${vars.user} = {
-    xdg.desktopEntries = {
-      feh = {
-        name = "Feh";
-        genericName = "Image viewer";
-        comment = "Image viewer and cataloguer";
-        exec = "feh -Z -. -g 1280x720 --start-at %u";
-        terminal = false;
-        type = "Application";
-        icon = "feh";
-        categories = [ "Graphics" "2DGraphics" "Viewer" ];
-        mimeType = [ "image/bmp" "image/gif" "image/jpeg" "image/jpg" "image/pjpeg" "image/png" "image/tiff" "image/webp" "image/x-bmp" "image/x-pcx" "image/x-png" "image/x-portable-anymap" "image/x-portable-bitmap" "image/x-portable-graymap" "image/x-portable-pixmap" "image/x-tga" "image/x-xbitmap" "image/heic" ];
-        noDisplay = true;
-      };
-    };
-
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -60,20 +45,20 @@
 
             # APPLICATION KEYS
             "$mod, RETURN, exec, ${vars.terminal}"
-            "$mod, G, exec, brave"
-            "$mod, V, exec, code"
-            "$mod, M, exec, wofi --show drun"
+            "$mod, G, exec, ${pkgs.brave}/bin/brave --password-store=gnome-libsecret"
+            "$mod, V, exec, ${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret"
+            "$mod, M, exec, ${pkgs.wofi}/bin/wofi --show drun"
 
             # ACTION KEYS
-            "$mod Alt_L, P, exec, hyprpicker -ar | xargs -I {} dunstify \"Color copied to clipboard\" \"<span background='{}'>{}</span>\""
-            ", Print, exec, grim -o $(hyprctl activeworkspace -j | jq -r '.monitor') $HOME/Pictures/$(date +\"Screenshot_%Y-%m-%d_%H.%M.%S.%s\") && dunstify 'Screnshot saved' 'Saved in ~/Pictures'"
-            "Ctrl_L, Print, exec, grim -g \"$(slurp)\" $HOME/Pictures/$(date +\"Screenshot_%Y-%m-%d_%H.%M.%S.%s\") && dunstify 'Screnshot saved' 'Saved in ~/Pictures'"
+            "$mod Alt_L, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -ar | xargs -I {} dunstify \"Color copied to clipboard\" \"<span background='{}'>{}</span>\""
+            ", Print, exec, ${pkgs.grim}/bin/grim -o $(hyprctl activeworkspace -j | jq -r '.monitor') $HOME/Pictures/$(date +\"Screenshot_%Y-%m-%d_%H.%M.%S.%s\") && dunstify 'Screnshot saved' 'Saved in ~/Pictures'"
+            "Ctrl_L, Print, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" $HOME/Pictures/$(date +\"Screenshot_%Y-%m-%d_%H.%M.%S.%s\") && dunstify 'Screnshot saved' 'Saved in ~/Pictures'"
 
             # MEDIA KEYS
-            ", XF86AudioPlay, exec, playerctl play-pause"
-            ", XF86AudioStop, exec, playerctl -a pause"
-            ", XF86AudioNext, exec, playerctl next"
-            ", XF86AudioPrev, exec, playerctl previous"
+            ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+            ", XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl -a pause"
+            ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+            ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
 
             # VOLUME KEYS
             ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -117,6 +102,7 @@
 
         windowrulev2 = [
           "float, class:(feh)"
+          "float, title:(_crx_nngceckbapebfimnlniiiahkandclblb)"
         ];
 
         general = {

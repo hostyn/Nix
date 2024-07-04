@@ -15,6 +15,7 @@
   home-manager.users.${vars.user} =
     {
       home.packages = with pkgs; [
+        neovim
         bat
         eza
         dust
@@ -211,20 +212,21 @@
         history.share = true;
 
         shellAliases = {
-          vi = "nvim";
-          cat = "bat";
+          vi = "${pkgs.neovim}/bin/nvim";
+          cat = "${pkgs.bat}/bin/bat";
           catn = "/usr/bin/env cat";
-          ls = "eza -ls name --group-directories-first";
-          l = "eza -ls name --group-directories-first";
-          la = "eza -las name --group-directories-first";
-          lt = "eza -lTs name --group-directories-first";
-          lta = "eza -laTs name --group-directories-first";
-          lat = "eza -laTs name --group-directories-first";
-          df = "duf";
-          du = "dust -Brn 20";
-          top = "galnces";
-          htop = "btm";
-          dig = "dog";
+          ls = "${pkgs.eza}/bin/eza -ls name --group-directories-first";
+          l = "${pkgs.eza}/bin/eza -ls name --group-directories-first";
+          la = "${pkgs.eza}/bin/eza -las name --group-directories-first";
+          lt = "${pkgs.eza}/bin/eza -lTs name --group-directories-first";
+          lta = "${pkgs.eza}/bin/eza -laTs name --group-directories-first";
+          lat = "${pkgs.eza}/bin/eza -laTs name --group-directories-first";
+          df = "${pkgs.duf}/bin/duf";
+          du = "${pkgs.dust}/bin/dust -Brn 20";
+          top = "${pkgs.glances}/bin/galnces";
+          htop = "${pkgs.bottom}/bin/btm";
+          dig = "${pkgs.dogdns}/bin/dog";
+          code = "${pkgs.vscodium}/bin/codium";
         };
 
         plugins = [

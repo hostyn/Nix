@@ -13,7 +13,16 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
 
-  services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.enable = true;
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+
+  # TODO: Add keyring
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
+  programs.seahorse.enable = true;
+
 
   hardware = {
     opengl = {
@@ -56,6 +65,8 @@
       [
         discord # Messaging
         libsForQt5.dolphin
+        protonvpn-cli
+        protonvpn-gui
       ];
   };
 

@@ -1,3 +1,4 @@
 [
   ./dunst.nix
+  ./xdg.nix
 ]
