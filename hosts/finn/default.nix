@@ -26,10 +26,9 @@
   };
 
   environment = {
-    systemPackages = with pkgs;
+    systemPackages = with pkgs; # Device specific packages
       [
-        discord # Messaging
-        libsForQt5.dolphin
+
       ];
   };
 

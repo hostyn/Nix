@@ -125,15 +125,13 @@ in
       feh
       firefox
       kdePackages.ark
-      killall
       libreoffice
-      nano
-      neovim
       nixpkgs-fmt
       pavucontrol
       python3
       spotify
-      wget
+      discord # Chat
+      libsForQt5.dolphin # File manager
     ] ++
     (with unstable; [
     ]);

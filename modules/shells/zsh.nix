@@ -10,24 +10,104 @@
   };
 
   programs.zsh.enable = true;
-  programs.starship.enable = true;
 
-  home-manager.users.${vars.user} =
+  # Shell tools
+  environment.systemPackages = with pkgs; [
+    bat
+    bottom
+    dogdns
+    duf
+    dust
+    eza
+    glances
+    jq
+    killall
+    nano
+    neovim
+    unzip
+    wget
+  ] ++
+  (with unstable; [
+  ]);
+
+  home-manager.users.${vars.user}.programs =
     {
-      home.packages = with pkgs; [
-        neovim
-        bat
-        eza
-        dust
-        duf
-        jq
-        bottom
-        glances
-        dogdns
-        unzip
-      ];
+      zsh = {
+        enable = true;
+        autocd = true;
 
-      programs.starship = {
+        syntaxHighlighting.enable = true;
+        autosuggestion.enable = true;
+
+        history.expireDuplicatesFirst = true;
+        history.ignoreDups = true;
+        history.ignoreSpace = true;
+        history.share = true;
+
+        shellAliases = {
+          vi = "${pkgs.neovim}/bin/nvim";
+          cat = "${pkgs.bat}/bin/bat";
+          catn = "/usr/bin/env cat";
+          ls = "${pkgs.eza}/bin/eza -ls name --group-directories-first";
+          l = "${pkgs.eza}/bin/eza -ls name --group-directories-first";
+          la = "${pkgs.eza}/bin/eza -las name --group-directories-first";
+          lt = "${pkgs.eza}/bin/eza -lTs name --group-directories-first";
+          lta = "${pkgs.eza}/bin/eza -laTs name --group-directories-first";
+          lat = "${pkgs.eza}/bin/eza -laTs name --group-directories-first";
+          df = "${pkgs.duf}/bin/duf";
+          du = "${pkgs.dust}/bin/dust -Brn 20";
+          top = "${pkgs.glances}/bin/galnces";
+          htop = "${pkgs.bottom}/bin/btm";
+          dig = "${pkgs.dogdns}/bin/dog";
+          code = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret";
+          nixos-rebuild = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
+        };
+
+        plugins = [
+          {
+            name = "zsh-sudo";
+            file = "plugins/sudo/sudo.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "ohmyzsh";
+              repo = "ohmyzsh";
+              rev = "dd4be1b6fb9973d63eba334d8bd92b3da30b3e72";
+              sha256 = "sha256-d6gqfBxAm4Y1xt204GhPhhEBOwP97K7qCeIf6I6Wbfg=";
+            };
+          }
+        ];
+
+        # TODO: Make initExtra the nix way
+        initExtra = "
+        bindkey \"^[[H\" beginning-of-line  # Home / Inicio
+        bindkey \"^[[F\" end-of-line        # End / Fin
+        bindkey \"^[[1;5C\" forward-word    # Ctr + Right
+        bindkey \"^[[1;5D\" backward-word   # Ctr + Left
+        bindkey \"^[[3~\" delete-char       # Supr
+        bindkey \"^H\" backward-delete-word # Ctr + Return
+
+        extract() {
+          if [ -f $1 ]; then
+            case $1 in
+            *.tar.bz2) tar xjf $1 ;;
+            *.tar.gz) tar xzf $1 ;;
+            *.bz2) bunzip2 $1 ;;
+            *.rar) rar x $1 ;;
+            *.gz) gunzip $1 ;;
+            *.tar) tar xf $1 ;;
+            *.tbz2) tar xjf $1 ;;
+            *.tgz) tar xzf $1 ;;
+            *.zip) unzip $1 ;;
+            *.Z) uncompress $1 ;;
+            *.7z) 7z x $1 ;;
+            *) echo \"'$1' cannot be extracted via extract()\" ;;
+            esac
+          else
+            echo \"'$1' is not a valid file\"
+          fi
+      }";
+      };
+
+      starship = {
         enable = true;
         enableZshIntegration = true;
         settings = {
@@ -197,80 +277,6 @@
             symbol = " ";
           };
         };
-      };
-
-      programs.zsh = {
-        enable = true;
-        autocd = true;
-
-        syntaxHighlighting.enable = true;
-        autosuggestion.enable = true;
-
-        history.expireDuplicatesFirst = true;
-        history.ignoreDups = true;
-        history.ignoreSpace = true;
-        history.share = true;
-
-        shellAliases = {
-          vi = "${pkgs.neovim}/bin/nvim";
-          cat = "${pkgs.bat}/bin/bat";
-          catn = "/usr/bin/env cat";
-          ls = "${pkgs.eza}/bin/eza -ls name --group-directories-first";
-          l = "${pkgs.eza}/bin/eza -ls name --group-directories-first";
-          la = "${pkgs.eza}/bin/eza -las name --group-directories-first";
-          lt = "${pkgs.eza}/bin/eza -lTs name --group-directories-first";
-          lta = "${pkgs.eza}/bin/eza -laTs name --group-directories-first";
-          lat = "${pkgs.eza}/bin/eza -laTs name --group-directories-first";
-          df = "${pkgs.duf}/bin/duf";
-          du = "${pkgs.dust}/bin/dust -Brn 20";
-          top = "${pkgs.glances}/bin/galnces";
-          htop = "${pkgs.bottom}/bin/btm";
-          dig = "${pkgs.dogdns}/bin/dog";
-          code = "${pkgs.vscodium}/bin/codium";
-        };
-
-        plugins = [
-          {
-            name = "zsh-sudo";
-            file = "plugins/sudo/sudo.plugin.zsh";
-            src = pkgs.fetchFromGitHub {
-              owner = "ohmyzsh";
-              repo = "ohmyzsh";
-              rev = "dd4be1b6fb9973d63eba334d8bd92b3da30b3e72";
-              sha256 = "sha256-d6gqfBxAm4Y1xt204GhPhhEBOwP97K7qCeIf6I6Wbfg=";
-            };
-          }
-        ];
-
-        # PROMPT=\"%B%F{200}%n%f %F{7}on%f %F{39}%~%f%b %(?..%B%F{red}%? %f%b) \"
-        initExtra = "
-        bindkey \"^[[H\" beginning-of-line  # Home / Inicio
-        bindkey \"^[[F\" end-of-line        # End / Fin
-        bindkey \"^[[1;5C\" forward-word    # Ctr + Right
-        bindkey \"^[[1;5D\" backward-word   # Ctr + Left
-        bindkey \"^[[3~\" delete-char       # Supr
-        bindkey \"^H\" backward-delete-word # Ctr + Return
-
-        extract() {
-          if [ -f $1 ]; then
-            case $1 in
-            *.tar.bz2) tar xjf $1 ;;
-            *.tar.gz) tar xzf $1 ;;
-            *.bz2) bunzip2 $1 ;;
-            *.rar) rar x $1 ;;
-            *.gz) gunzip $1 ;;
-            *.tar) tar xf $1 ;;
-            *.tbz2) tar xjf $1 ;;
-            *.tgz) tar xzf $1 ;;
-            *.zip) unzip $1 ;;
-            *.Z) uncompress $1 ;;
-            *.7z) 7z x $1 ;;
-            *) echo \"'$1' cannot be extracted via extract()\" ;;
-            esac
-          else
-            echo \"'$1' is not a valid file\"
-          fi
-      }";
       };
     };
 }
