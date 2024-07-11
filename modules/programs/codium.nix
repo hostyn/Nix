@@ -110,11 +110,99 @@
         # yoavbls.pretty-ts-errors
       ];
 
-      keybindings = [{
-        key = "ctrl+shift+g g";
-        command = "-workbench.view.scm";
-        when = "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'";
-      }];
+      # Remove all GitLens keybindings to fix Ctrl+Shift+G
+      keybindings = [
+        {
+          key = "ctrl+shift+g g";
+          command = "-workbench.view.scm";
+          when = "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'";
+        }
+        {
+          key = "ctrl+shift+g shift+h";
+          command = "-gitlens.showQuickRepoHistory";
+          when = "!gitlens:disabled && config.gitlens.keymap == 'chorded'";
+        }
+        {
+          key = "ctrl+shift+g h";
+          command = "-gitlens.showQuickFileHistory";
+          when = "!gitlens:disabled && config.gitlens.keymap == 'chorded'";
+        }
+        {
+          key = "ctrl+shift+g s";
+          command = "-gitlens.showQuickRepoStatus";
+          when = "!gitlens:disabled && config.gitlens.keymap == 'chorded'";
+        }
+        {
+          key = "ctrl+shift+g shift+7";
+          command = "-gitlens.gitCommands";
+          when = "!gitlens:disabled && config.gitlens.keymap == 'chorded'";
+        }
+        {
+          key = "ctrl+shift+g [Period]";
+          command = "-gitlens.diffWithNext";
+          when = "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/";
+        }
+        {
+          key = "ctrl+shift+g [Period]";
+          command = "-gitlens.diffWithNextInDiffRight";
+          when = "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/";
+        }
+        {
+          key = "ctrl+shift+g [Period]";
+          command = "-gitlens.diffWithNextInDiffLeft";
+          when = "editorTextFocus && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/";
+        }
+        {
+          key = "ctrl+shift+g [Comma]";
+          command = "-gitlens.diffWithPrevious";
+          when = "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/";
+        }
+        {
+          key = "ctrl+shift+g [Comma]";
+          command = "-gitlens.diffWithPreviousInDiffLeft";
+          when = "editorTextFocus && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/";
+        }
+        {
+          key = "ctrl+shift+g [Comma]";
+          command = "-gitlens.diffWithPreviousInDiffRight";
+          when = "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/";
+        }
+        {
+          key = "ctrl+shift+g shift+[IntlBackslash]";
+          command = "-gitlens.diffWithWorking";
+          when = "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/";
+        }
+        {
+          key = "ctrl+shift+g ctrl+shift+alt+x";
+          command = "-gitlens.diffWithWorking";
+          when = "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/";
+        }
+        {
+          key = "ctrl+shift+g [IntlBackslash]";
+          command = "-gitlens.diffLineWithPrevious";
+          when = "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/";
+        }
+        {
+          key = "ctrl+shift+g ctrl+shift+alt+z";
+          command = "-gitlens.diffLineWithPrevious";
+          when = "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/";
+        }
+        {
+          key = "ctrl+shift+g c";
+          command = "-gitlens.showQuickCommitFileDetails";
+          when = "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'chorded'";
+        }
+        {
+          key = "ctrl+shift+g b";
+          command = "-gitlens.toggleFileBlame";
+          when = "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /blameable/";
+        }
+        {
+          key = "ctrl+shift+g shift+b";
+          command = "-gitlens.toggleCodeLens";
+          when = "editorTextFocus && !gitlens:disabled && !gitlens:disabledToggleCodeLens && config.gitlens.keymap == 'chorded'";
+        }
+      ];
     };
   };
 }

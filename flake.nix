@@ -13,6 +13,10 @@
         url = "github:nix-community/home-manager/release-24.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+
+      grub2-themes = {
+        url = "github:vinceliuice/grub2-themes";
+      };
     };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, ... }: # Function telling flake which inputs to use
@@ -23,7 +27,7 @@
         location = "$HOME/.setup";
         terminal = "kitty";
         editor = "nvim";
-        visualeditor = "code";
+        visualeditor = "codium";
       };
       palette = (nix-colors.lib.schemeFromYAML "dracula" (builtins.readFile ./modules/theming/themes/dracula.yaml)).palette;
     in

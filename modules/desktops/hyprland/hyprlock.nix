@@ -1,7 +1,8 @@
-{ pkgs, vars, palette, nix-colors, ... }:
+{ pkgs, vars, palette, nix-colors, inputs, ... }:
 
 {
-  programs.hyprlock.enable = true;
+  # TODO: Label only update when there user input (keyboard or mouse)
+  # https://github.com/hyprwm/hyprlock/issues/357
 
   home-manager.users.${vars.user} = {
     programs.hyprlock = {
@@ -43,7 +44,7 @@
         label = [
           # TIME
           {
-            text = "cmd[update:1000] date +%H:%M";
+            text = "cmd[update:1000] date +%H:%M:%S";
             font_size = 64;
             font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
             position = "0, 64";

@@ -27,29 +27,6 @@ let
   lib = nixpkgs.lib;
 in
 {
-  # Desktop Profile
-  zeus = lib.nixosSystem {
-    inherit system;
-    specialArgs = {
-      inherit inputs system unstable vars palette nix-colors;
-      host = {
-        hostName = "zeus";
-      };
-    };
-    modules = [
-      # nur.nixosModules.nur
-      # nixvim.nixosModules.nixvim
-      ./zeus
-      ./configuration.nix
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-      }
-    ];
-  };
-
   finn = lib.nixosSystem {
     inherit system;
     specialArgs = {
@@ -60,13 +37,15 @@ in
     };
     modules = [
       ./finn
-      ./configuration.nix
+      ./desktop.nix
 
       home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
+
+      inputs.grub2-themes.nixosModules.default
     ];
   };
 }

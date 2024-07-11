@@ -2,7 +2,6 @@
 
 {
   programs.hyprland.enable = true;
-  programs.hyprlock.enable = true;
   services.udisks2.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -12,6 +11,8 @@
     wl-clipboard # Clipboard manager - needed for hyprpicker
     grim # Screenshot tool
     slurp # Region selection tool - needed for grim
+    libsForQt5.polkit-kde-agent # Polkit agent
+    wlsunset # Night mode
   ];
 
   home-manager.users.${vars.user} = {
@@ -29,10 +30,12 @@
         # AUTO START
         exec-once = [
           "hyprpaper"
-          "hypridle"
+          # "hypridle"
           "waybar"
           "udiskie -t"
-          "hyprctl dispatch focusmonitor 1"
+          "hyprctl dispatch focusmonitor 1 && hyprctl dispatch focusworkspaceoncurrentmonitor 1"
+          "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
+          "${pkgs.wlsunset}/bin/wlsunset -l 38.353717 -L -0.491745 -t 5000"
         ];
 
         # KEY BINDINGS
@@ -47,7 +50,7 @@
             "$mod, RETURN, exec, ${vars.terminal}"
             "$mod, G, exec, ${pkgs.brave}/bin/brave --password-store=gnome-libsecret"
             "$mod, V, exec, ${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret"
-            "$mod, M, exec, ${pkgs.wofi}/bin/wofi --show drun"
+            "$mod, M, exec, pidof ${pkgs.wofi}/bin/wofi || ${pkgs.wofi}/bin/wofi --show drun"
 
             # ACTION KEYS
             "$mod Alt_L, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -ar | xargs -I {} dunstify \"Color copied to clipboard\" \"<span background='{}'>{}</span>\""
@@ -102,7 +105,9 @@
 
         windowrulev2 = [
           "float, class:(feh)"
-          "float, title:(_crx_nngceckbapebfimnlniiiahkandclblb)"
+          "float, title:(_crx_nngceckbapebfimnlniiiahkandclblb)" # Bitwarden Chrome extension
+          "float, class:(ark)"
+          "float, class:(org.kde.polkit-kde-authentication-agent-1)"
         ];
 
         general = {

@@ -5,25 +5,6 @@
     ./hardware-configuration.nix
   ];
 
-  # Boot Options
-  # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
-
-  # services.displayManager.sddm.enable = true;
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-
-  # TODO: Add keyring
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.gdm.enableGnomeKeyring = true;
-  programs.seahorse.enable = true;
-
-
   hardware = {
     opengl = {
       enable = true;
@@ -44,29 +25,11 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # hardware = {
-  #   opengl = {
-  #     enable = true;
-  #     extraPackages = with pkgs; [
-  #       intel-media-driver
-  #       vaapiIntel
-  #       vaapiVdpau
-  #       libvdpau-va-gl
-  #     ];
-  #   };
-  #   sane = {
-  #     enable = true;
-  #     extraBackends = [ pkgs.sane-airscan ];
-  #   };
-  # };
-
   environment = {
     systemPackages = with pkgs;
       [
         discord # Messaging
         libsForQt5.dolphin
-        protonvpn-cli
-        protonvpn-gui
       ];
   };
 

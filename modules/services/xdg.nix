@@ -1,4 +1,4 @@
-{ vars, pkgs, ... }:
+{ vars, pkgs, lib, config, ... }:
 
 {
   home-manager.users.${vars.user} = {
@@ -13,15 +13,15 @@
           "text/html" = "codium.desktop";
           "text/csv" = "codium.desktop";
           "application/pdf" = [ "brave-browser.desktop" "firefox.desktop" ];
-          "application/zip" = "org.gnome.FileRoller.desktop";
-          "application/x-tar" = "org.gnome.FileRoller.desktop";
-          "application/x-bzip2" = "org.gnome.FileRoller.desktop";
-          "application/x-gzip" = "org.gnome.FileRoller.desktop";
+          "application/zip" = "org.kde.ark.desktop";
+          "application/x-tar" = "org.kde.ark.desktop";
+          "application/x-bzip2" = "org.kde.ark.desktop";
+          "application/x-gzip" = "org.kde.ark.desktop";
           "x-scheme-handler/http" = [ "brave-browser.desktop" "firefox.desktop" ];
           "x-scheme-handler/https" = [ "brave-browser.desktop" "firefox.desktop" ];
           "x-scheme-handler/about" = [ "brave-browser.desktop" "firefox.desktop" ];
           "x-scheme-handler/unknown" = [ "brave-browser.desktop" "firefox.desktop" ];
-          "x-scheme-handler/mailto" = [ "gmail.desktop" ];
+          # "x-scheme-handler/mailto" = [ "gmail.desktop" ];org.kde.ark.desktop
           "audio/mp3" = "mpv.desktop";
           "audio/x-matroska" = "mpv.desktop";
           "video/webm" = "mpv.desktop";
@@ -32,7 +32,7 @@
       };
 
       desktopEntries = {
-        feh = lib.mkIf (pkgs.feh != null) {
+        feh = lib.mkIf (lib.elem pkgs.feh config.environment.systemPackages) {
           name = "Feh";
           genericName = "Image viewer";
           comment = "Image viewer and cataloguer";
@@ -45,7 +45,7 @@
           noDisplay = true;
         };
 
-        codium = {
+        codium = lib.mkIf (lib.elem pkgs.vscodium config.environment.systemPackages) {
           categories = [ "Utility" "TextEditor" "Development" "IDE" ];
           comment = "Code Editing. Redefined.";
           exec = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret %F";
@@ -62,7 +62,7 @@
           };
         };
 
-        brave-browser = {
+        brave-browser = lib.mkIf (lib.elem pkgs.brave config.environment.systemPackages) {
           name = "Brave Web Browser";
           genericName = "Web Browser";
           comment = "Access the Internet";

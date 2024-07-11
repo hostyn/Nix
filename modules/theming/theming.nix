@@ -17,9 +17,13 @@
 
     gtk = {
       enable = true;
+      # theme = {
+      #   name = "Orchis-Dark-Compact";
+      #   package = pkgs.orchis-theme;
+      # };
       theme = {
-        name = "Orchis-Dark-Compact";
-        package = pkgs.orchis-theme;
+        name = "Adwaita-dark";
+        package = pkgs.gnome.gnome-themes-extra;
       };
       iconTheme = {
         name = "Papirus-Dark";
@@ -30,13 +34,16 @@
       };
     };
 
-    qt.enable = true;
-    qt.platformTheme.name = "gtk";
-    qt.style.name = "adwaita-dark";
-    qt.style.package = pkgs.adwaita-qt;
+    qt = {
+      enable = true;
+      platformTheme.name = "gtk";
+      style.name = "adwaita-dark";
+      style.package = pkgs.adwaita-qt;
+    };
   };
 
   environment.variables = {
-    QT_QPA_PLATFORMTHEME = "gtk2";
+    # QT_QPA_PLATFORMTHEME = "gtk2";
+
   };
 }
