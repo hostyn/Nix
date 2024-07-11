@@ -60,7 +60,7 @@
           htop = "${pkgs.bottom}/bin/btm";
           dig = "${pkgs.dogdns}/bin/dog";
           code = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret";
-          nixos-rebuild = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
+          upgrade = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
         };
 
         plugins = [

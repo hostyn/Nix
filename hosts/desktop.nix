@@ -129,9 +129,10 @@ in
       nixpkgs-fmt
       pavucontrol
       python3
-      spotify
       discord # Chat
       libsForQt5.dolphin # File manager
+      # spotifywm # Music
+      spotify
     ] ++
     (with unstable; [
     ]);
