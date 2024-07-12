@@ -132,7 +132,6 @@ in
       discord # Chat
       libsForQt5.dolphin # File manager
       # spotifywm # Music
-      spotify
     ] ++
     (with unstable; [
     ]);
@@ -140,6 +139,7 @@ in
 
   programs = {
     dconf.enable = true;
+    direnv.enable = true;
   };
 
   hardware.pulseaudio.enable = false;
@@ -158,8 +158,6 @@ in
       jack.enable = true;
     };
   };
-
-  programs.direnv.enable = true;
 
   nix = {
     settings = {
