@@ -49,6 +49,7 @@
         "workbench.activityBar.location" = "hidden";
         "workbench.colorTheme" = "GitHub Dark";
         "workbench.iconTheme" = "material-icon-theme";
+        "git.autofetch" = true;
 
         "[json]" = {
           "editor.defaultFormatter" = "vscode.json-language-features";

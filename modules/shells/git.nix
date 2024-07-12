@@ -18,6 +18,7 @@
 
       extraConfig = {
         init.defaultBranch = "main";
+        color.ui = "auto";
       };
     };
 
