@@ -48,4 +48,26 @@ in
       inputs.grub2-themes.nixosModules.default
     ];
   };
+
+  jake = lib.nixosSystem {
+    inherit system;
+    specialArgs = {
+      inherit inputs system unstable vars palette nix-colors;
+      host = {
+        hostName = "jake";
+      };
+    };
+    modules = [
+      ./jake
+      ./desktop.nix
+
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+
+      inputs.grub2-themes.nixosModules.default
+    ];
+  };
 }
