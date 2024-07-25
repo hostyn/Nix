@@ -5,6 +5,30 @@
     ./hardware-configuration.nix
   ];
 
+  # Boot Options
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+      };
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+      };
+      grub2-theme = {
+        enable = true;
+        theme = "stylish";
+        screen = "2k";
+      };
+    };
+    tmp = {
+      cleanOnBoot = true;
+      tmpfsSize = "5GB";
+    };
+  };
+
   hardware = {
     opengl = {
       enable = true;

@@ -34,6 +34,14 @@ in
       host = {
         hostName = "finn";
       };
+      monitors = {
+        list = [ "HDMI-A-1" "DP-1" ];
+        hyprland = [
+          "HDMI-A-1,1920x1080@60,0x180,1"
+          "DP-1,2560x1440@164.80,1920x0,1"
+          "Unknown-1,disable"
+        ];
+      };
     };
     modules = [
       ./finn
@@ -55,6 +63,12 @@ in
       inherit inputs system unstable vars palette nix-colors;
       host = {
         hostName = "jake";
+      };
+      monitors = {
+        list = [ "eDP-1" ];
+        hyprland = [
+          "eDP-1,1920x1080@60.06,0x0,1"
+        ];
       };
     };
     modules = [

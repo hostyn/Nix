@@ -1,4 +1,4 @@
-{ pkgs, vars, palette, ... }:
+{ pkgs, vars, palette, monitors, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -12,10 +12,7 @@
       settings = {
         preload =
           [ "$HOME/.config/wallpapers/car.jpg" ];
-        wallpaper = [
-          "DP-1,$HOME/.config/wallpapers/car.jpg"
-          "HDMI-A-1,$HOME/.config/wallpapers/car.jpg"
-        ];
+        wallpaper = builtins.map (x: x + ",$HOME/.config/wallpapers/car.jpg") monitors.list;
       };
     };
   };

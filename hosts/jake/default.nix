@@ -6,9 +6,34 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  # Boot Options
+  boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+      };
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+      };
+      grub2-theme = {
+        enable = true;
+        theme = "stylish";
+        screen = "1080p";
+      };
+    };
+    tmp = {
+      cleanOnBoot = true;
+      tmpfsSize = "5GB";
+    };
+  };
 
   hardware = {
     opengl = {
@@ -28,12 +53,21 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      amdgpuBusId = "PCI:5:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+    };
   };
 
   environment = {
     systemPackages = with pkgs; # Device specific packages
       [
-
+        brightnessctl
+        cbatticon
       ];
   };
 

@@ -35,30 +35,6 @@ in
       import ../modules/theming ++
       import ../modules/shells);
 
-  # Boot Options
-  boot = {
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-      };
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        useOSProber = true;
-      };
-      grub2-theme = {
-        enable = true;
-        theme = "stylish";
-        screen = "2k";
-      };
-    };
-    tmp = {
-      cleanOnBoot = true;
-      tmpfsSize = "5GB";
-    };
-  };
-
   # services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
@@ -75,6 +51,7 @@ in
   };
 
   networking.hostName = host.hostName;
+  networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Madrid";
   i18n = {

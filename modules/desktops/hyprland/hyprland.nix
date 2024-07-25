@@ -1,4 +1,4 @@
-{ pkgs, vars, palette, nix-colors, ... }:
+{ lib, pkgs, vars, config, palette, nix-colors, monitors, ... }:
 
 {
   programs.hyprland.enable = true;
@@ -13,6 +13,7 @@
     slurp # Region selection tool - needed for grim
     libsForQt5.polkit-kde-agent # Polkit agent
     wlsunset # Night mode
+    networkmanagerapplet # Internet tray icon
   ];
 
   home-manager.users.${vars.user} = {
@@ -21,11 +22,7 @@
 
       settings = {
         # MONITORS
-        monitor = [
-          "HDMI-A-1,1920x1080@60,0x180,1"
-          "DP-1,2560x1440@164.80,1920x0,1"
-          "Unknown-1,disable"
-        ];
+        monitor = monitors.hyprland;
 
         # AUTO START
         exec-once = [
@@ -36,6 +33,7 @@
           "hyprctl dispatch focusmonitor 1 && hyprctl dispatch focusworkspaceoncurrentmonitor 1"
           "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
           "${pkgs.wlsunset}/bin/wlsunset -l 38.353717 -L -0.491745 -t 5000"
+          "nm-applet"
         ];
 
         # KEY BINDINGS
@@ -67,6 +65,10 @@
             ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
             ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
             ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+            # BRIGHTNESS KEYS
+            "${if lib.elem pkgs.brightnessctl config.environment.systemPackages then ", XF86MonBrightnessUp, exec, brightnessctl s 10%+" else ""}"
+            "${if lib.elem pkgs.brightnessctl config.environment.systemPackages then ", XF86MonBrightnessDown, exec, brightnessctl s 10%-" else ""}"
 
             # SESSION KEYS
             "$mod SHIFT, Delete, exec, $HOME/.config/scripts/powermenu"
@@ -123,6 +125,10 @@
           kb_layout = "es";
           follow_mouse = 1;
           sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+
+          touchpad = {
+            natural_scroll = true;
+          };
         };
 
         decoration = {

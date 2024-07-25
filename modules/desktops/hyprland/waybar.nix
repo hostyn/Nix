@@ -84,6 +84,7 @@
 
           tray = {
             icon-size = 12;
+            spacing = 15;
           };
 
           clock = {
@@ -127,7 +128,8 @@
         }
 
         #clock, #tray, #cpu, #memory, #disk, #network, #pulseaudio, #mpris {
-          padding-right: 15px;
+          padding-right: 7px;
+          padding-left: 7px;
         }
 
         #mpris {
