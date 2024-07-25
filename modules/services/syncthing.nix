@@ -4,7 +4,7 @@
   home-manager.users.${vars.user} = {
     services.syncthing = {
       enable = true;
-      tray = true;
+      tray.enable = true;
     };
   };
 }

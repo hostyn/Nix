@@ -108,6 +108,8 @@ in
       python3
       discord # Chat
       libsForQt5.dolphin # File manager
+      calibre # Ebook manager
+      obsidian # Notes
       # spotifywm # Music
     ] ++
     (with unstable; [
