@@ -110,6 +110,7 @@ in
       libsForQt5.dolphin # File manager
       calibre # Ebook manager
       obsidian # Notes
+      gparted # Partition manager  TODO: Fix this
       # spotifywm # Music
     ] ++
     (with unstable; [

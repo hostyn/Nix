@@ -17,10 +17,6 @@
 
     gtk = {
       enable = true;
-      # theme = {
-      #   name = "Orchis-Dark-Compact";
-      #   package = pkgs.orchis-theme;
-      # };
       theme = {
         name = "Adwaita-dark";
         package = pkgs.gnome.gnome-themes-extra;
@@ -44,6 +40,5 @@
 
   environment.variables = {
     # QT_QPA_PLATFORMTHEME = "gtk2";
-
   };
 }

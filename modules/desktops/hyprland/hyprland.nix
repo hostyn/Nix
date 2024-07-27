@@ -66,10 +66,6 @@
             ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-"
             ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-            # BRIGHTNESS KEYS
-            "${if lib.elem pkgs.brightnessctl config.environment.systemPackages then ", XF86MonBrightnessUp, exec, brightnessctl s 10%+" else ""}"
-            "${if lib.elem pkgs.brightnessctl config.environment.systemPackages then ", XF86MonBrightnessDown, exec, brightnessctl s 10%-" else ""}"
-
             # SESSION KEYS
             "$mod SHIFT, Delete, exec, $HOME/.config/scripts/powermenu"
             "$mod, L, exec, loginctl lock-session"
@@ -98,7 +94,11 @@
             "$mod, period, focusmonitor, 1"
 
             "$mod, F, togglefloating,"
-          ];
+          ] ++ (if lib.elem pkgs.brightnessctl config.environment.systemPackages then [
+            # BRIGHTNESS KEYS
+            ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+            ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+          ] else [ ]);
 
         bindm = [
           "$mod, mouse:272, movewindow"
@@ -112,48 +112,52 @@
           "float, class:(org.kde.polkit-kde-authentication-agent-1)"
         ];
 
-        general = {
-          gaps_in = 5;
-          gaps_out = 15;
+        general =
+          {
+            gaps_in = 5;
+            gaps_out = 15;
 
-          border_size = 2;
-          "col.active_border" = "rgb(${palette.base0D})";
-        };
+            border_size = 2;
+            "col.active_border" = "rgb(${palette.base0D})";
+          };
 
         # KEYBOARD LAYOUT
-        input = {
-          kb_layout = "es";
-          follow_mouse = 1;
-          sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+        input =
+          {
+            kb_layout = "es";
+            follow_mouse = 1;
+            sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
-          touchpad = {
-            natural_scroll = true;
+            touchpad = {
+              natural_scroll = true;
+            };
           };
-        };
 
-        decoration = {
-          rounding = 10;
+        decoration =
+          {
+            rounding = 10;
 
-          # Change transparency of focused and unfocused windows
-          active_opacity = 1.0;
-          inactive_opacity = 1.0;
+            # Change transparency of focused and unfocused windows
+            active_opacity = 1.0;
+            inactive_opacity = 1.0;
 
-          drop_shadow = true;
-          shadow_range = 4;
-          shadow_render_power = 3;
+            drop_shadow = true;
+            shadow_range = 4;
+            shadow_render_power = 3;
 
-          blur = {
-            enabled = true;
-            size = 3;
-            passes = 1;
+            blur = {
+              enabled = true;
+              size = 3;
+              passes = 1;
 
-            vibrancy = 0.1696;
+              vibrancy = 0.1696;
+            };
           };
-        };
 
-        misc = {
-          disable_hyprland_logo = true;
-        };
+        misc =
+          {
+            disable_hyprland_logo = true;
+          };
       };
     };
   };
