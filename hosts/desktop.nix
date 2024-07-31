@@ -47,7 +47,7 @@ in
 
   users.users.${vars.user} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "camera" "networkmanager" "lp" "scanner" ];
+    extraGroups = [ "wheel" "video" "audio" "camera" "networkmanager" "lp" "scanner" "docker" ];
   };
 
   networking.hostName = host.hostName;
@@ -111,6 +111,8 @@ in
       calibre # Ebook manager
       obsidian # Notes
       gparted # Partition manager  TODO: Fix this
+      openlens # Kubernetes dashboard
+      kubectl # Kubernetes CLI
       # spotifywm # Music
     ] ++
     (with unstable; [
