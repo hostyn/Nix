@@ -50,6 +50,7 @@
         "workbench.colorTheme" = "GitHub Dark";
         "workbench.iconTheme" = "material-icon-theme";
         "git.autofetch" = true;
+        "redhat.telemetry.enabled" = false;
 
         "[json]" = {
           "editor.defaultFormatter" = "vscode.json-language-features";
@@ -103,12 +104,19 @@
         pkief.material-icon-theme
         prisma.prisma
         redhat.vscode-yaml
-        styled-components.vscode-styled-components
+        # styled-components.vscode-styled-components
         # toba.vsfire
         tomoki1207.pdf
         usernamehw.errorlens
         # vivaxy.vscode-conventional-commits
         # yoavbls.pretty-ts-errors
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "vscode-conventional-commits";
+          publisher = "vivaxy";
+          version = "1.25.0";
+          sha256 = "sha256-KPP1suR16rIJkwj8Gomqa2ExaFunuG42fp14lBAZuwI=";
+        }
       ];
 
       # Remove all GitLens keybindings to fix Ctrl+Shift+G
