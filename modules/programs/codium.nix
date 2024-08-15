@@ -5,6 +5,8 @@
     programs.vscode = {
       enable = true;
       package = pkgs.vscodium;
+
+      # User settings
       userSettings = {
         "breadcrumbs.showArrays" = false;
         "breadcrumbs.showBooleans" = false;
@@ -51,6 +53,8 @@
         "workbench.iconTheme" = "material-icon-theme";
         "git.autofetch" = true;
         "redhat.telemetry.enabled" = false;
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
 
         "[json]" = {
           "editor.defaultFormatter" = "vscode.json-language-features";
@@ -74,6 +78,8 @@
           "editor.defaultFormatter" = "redhat.vscode-yaml";
         };
       };
+
+      # Extensions
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         bradlc.vscode-tailwindcss
@@ -108,14 +114,19 @@
         # toba.vsfire
         tomoki1207.pdf
         usernamehw.errorlens
-        # vivaxy.vscode-conventional-commits
-        # yoavbls.pretty-ts-errors
+        jnoortheen.nix-ide
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-conventional-commits";
           publisher = "vivaxy";
           version = "1.25.0";
           sha256 = "sha256-KPP1suR16rIJkwj8Gomqa2ExaFunuG42fp14lBAZuwI=";
+        }
+        {
+          name = "pretty-ts-errors";
+          publisher = "yoavbls";
+          version = "0.6.0";
+          sha256 = "sha256-cmleAs7EMXT1z0o8Uq5ne2LrthUt/vhcN+iqfAy/i/8=";
         }
       ];
 
@@ -211,7 +222,72 @@
           command = "-gitlens.toggleCodeLens";
           when = "editorTextFocus && !gitlens:disabled && !gitlens:disabledToggleCodeLens && config.gitlens.keymap == 'chorded'";
         }
+        {
+          "key" = "ctrl+shift+g [Period]";
+          "command" = "-gitlens.diffWithNext";
+          "when" = "editorTextFocus && gitlens:enabled && !isInDiffEditor && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/";
+        }
+        {
+          "key" = "ctrl+shift+g [Period]";
+          "command" = "-gitlens.diffWithNextInDiffLeft";
+          "when" = "editorTextFocus && gitlens:enabled && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/";
+        }
+        {
+          "key" = "ctrl+shift+g [Period]";
+          "command" = "-gitlens.diffWithNextInDiffRight";
+          "when" = "editorTextFocus && gitlens:enabled && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/";
+        }
+        {
+          "key" = "ctrl+shift+g [Comma]";
+          "command" = "-gitlens.diffWithPrevious";
+          "when" = "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'";
+        }
+        {
+          "key" = "ctrl+shift+g [Comma]";
+          "command" = "-gitlens.diffWithPreviousInDiffLeft";
+          "when" = "editorTextFocus && isInDiffEditor && !isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'";
+        }
+        {
+          "key" = "ctrl+shift+g [Comma]";
+          "command" = "-gitlens.diffWithPreviousInDiffRight";
+          "when" = "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'";
+        }
+        {
+          "key" = "ctrl+shift+g shift+[IntlBackslash]";
+          "command" = "-gitlens.diffWithWorking";
+          "when" = "editorTextFocus && gitlens:enabled && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/";
+        }
+        {
+          "key" = "ctrl+shift+g ctrl+shift+alt+x";
+          "command" = "-gitlens.diffWithWorking";
+          "when" = "editorTextFocus && gitlens:enabled && config.gitlens.keymap == 'chorded' && resourceScheme =~ /^(gitlens|git|pr)$/";
+        }
+        {
+          "key" = "ctrl+shift+g [IntlBackslash]";
+          "command" = "-gitlens.diffLineWithPrevious";
+          "when" = "editorTextFocus && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'";
+        }
+        {
+          "key" = "ctrl+shift+g ctrl+shift+alt+z";
+          "command" = "-gitlens.diffLineWithPrevious";
+          "when" = "editorTextFocus && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:tracked'";
+        }
+        {
+          "key" = "ctrl+shift+g b";
+          "command" = "-gitlens.toggleFileBlame";
+          "when" = "editorTextFocus && config.gitlens.keymap == 'chorded' && resource in 'gitlens:tabs:blameable'";
+        }
       ];
+
+      # User snippets
+      globalSnippets = {
+        "console.log" = {
+          prefix = "clg";
+          body = "console.log(\${1:value});";
+          description = "console.log shortcut";
+          scope = "javascript,javascriptreact,typescript,typescriptreact";
+        };
+      };
     };
   };
 }
