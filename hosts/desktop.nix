@@ -114,6 +114,8 @@ in
       openlens # Kubernetes dashboard
       kubectl # Kubernetes CLI
       # spotifywm # Music
+      nixd
+      cifs-utils
     ] ++
     (with unstable; [
     ]);
