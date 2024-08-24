@@ -116,6 +116,7 @@ in
       # spotifywm # Music
       nixd
       cifs-utils
+      nfs-utils
     ] ++
     (with unstable; [
     ]);
