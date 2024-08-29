@@ -69,7 +69,6 @@ in
             dig = "${pkgs.dogdns}/bin/dog";
             code = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret";
             rebuild = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
-            rebuild-remote = "sudo nixos-rebuild switch --flake github:hostyn/NixOS#$HOST";
             ssh = "kitten ssh";
           };
 
