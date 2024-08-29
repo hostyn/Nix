@@ -5,7 +5,7 @@
 { config, pkgs, lib, vars, ... }:
 
 let
-  cfg = lib.config.shells.zsh;
+  cfg = config.shells.zsh;
 in
 {
   options.shells.zsh = {
