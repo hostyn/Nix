@@ -7,7 +7,7 @@
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
 
-  users.users.serveradmin = {
+  users.users.${vars.user} = {
     isNormalUser = true;
     description = "serveradmin";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -20,4 +20,6 @@
 
     ];
   };
+
+  system.stateVersion = "24.05";
 }

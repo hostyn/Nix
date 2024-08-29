@@ -88,11 +88,15 @@ in
   kube-1 = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars nix-colors;
+      inherit inputs system unstable nix-colors;
       host = {
         hostName = "kube-1";
       };
+      vars = {
+        user = "serveradmin";
+      };
     };
+
     modules = [
       ./kube
 
