@@ -4,14 +4,17 @@
   imports =
     (import ../modules/shells);
 
-  # Custom modules
-  shells.zsh.enable = true;
+
+  ### --- Custom options --- ###
+  custom.shells.zsh.enable = true;
 
 
-  # Other modules
+  ### --- Other options --- ###
+
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
 
+  programs.git.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -25,7 +28,6 @@
     ];
 
     packages = with pkgs; [
-
     ];
   };
 

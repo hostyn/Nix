@@ -1,10 +1,10 @@
 { config, lib, vars, ... }:
 
 let
-  cfg = config.shells.scripts;
+  cfg = config.custom.shells.scripts;
 in
 {
-  options.shells.scripts = {
+  options.custom.shells.scripts = {
     powermenu = {
       enable = lib.mkEnableOption "Enable powermenu script";
     };
