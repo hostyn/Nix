@@ -1,8 +1,8 @@
 { pkgs, unstable, inputs, vars, host, ... }:
 
 {
-  # imports =
-  #   (import ../modules/shells/zsh.nix);
+  imports =
+    (import ../modules/shells/zsh.nix);
 
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
