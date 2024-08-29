@@ -2,7 +2,7 @@
 #  Shell
 #
 
-{ pkgs, lib, vars, ... }:
+{ config, pkgs, lib, vars, ... }:
 
 let
   cfg = lib.config.shells.zsh;
