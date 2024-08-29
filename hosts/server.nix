@@ -19,7 +19,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   networking.defaultGateway = "192.168.1.1";
-  # networking.nameservers = [ "192.168.1.240" ];
+  networking.nameservers = [ "192.168.1.240" "1.1.1.1" ];
   networking.interfaces.ens18.ipv4.addresses = [{
     address = vars.ipAddress;
     prefixLength = 24;
