@@ -84,4 +84,17 @@ in
       inputs.grub2-themes.nixosModules.default
     ];
   };
+
+  kube-1 = lib.nixosSystem {
+    inherit system;
+    specialArgs = {
+      inherit inputs system unstable vars nix-colors;
+      host = {
+        hostName = "kube-1";
+      };
+    };
+    modules = [
+      ./kube
+    ];
+  };
 }
