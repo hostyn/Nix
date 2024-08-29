@@ -99,6 +99,7 @@ in
 
     modules = [
       ./kube
+      ./server.nix
 
       home-manager.nixosModules.home-manager
       {
