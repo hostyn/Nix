@@ -6,9 +6,6 @@
       ./hardware-configuration.nix
     ];
 
-  services.openssh.enable = true;
-  services.qemuGuest.enable = true;
-
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = false;
@@ -40,25 +37,9 @@
 
   console.keyMap = "es";
 
-  users.users.serveradmin = {
-    isNormalUser = true;
-    description = "serveradmin";
-    extraGroups = [ "networkmanager" "wheel" ];
-
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDuGzl7Kmz41kb/nYyVUBLICQoOXWWAibgeqH+RT0YdX ruben@martinezhostyn.com"
-    ];
-
-    packages = with pkgs; [
-
-    ];
-  };
-
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     git
   ];
-
-  system.stateVersion = "24.05";
 }
