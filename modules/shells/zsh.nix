@@ -44,6 +44,10 @@
         history.ignoreSpace = true;
         history.share = true;
 
+        envExtra = [
+          "TERM=rxvt"
+        ];
+
         shellAliases = {
           vi = "${pkgs.neovim}/bin/nvim";
           cat = "${pkgs.bat}/bin/bat";
