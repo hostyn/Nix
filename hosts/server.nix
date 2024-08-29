@@ -2,7 +2,7 @@
 
 {
   imports =
-    (import ../modules/shells);
+    (import ../modules/shells/zsh.nix);
 
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
