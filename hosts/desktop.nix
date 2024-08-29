@@ -22,11 +22,7 @@
 #           └─ default.nix
 #
 
-{ pkgs, unstable, inputs, vars, host, ... }:
-
-let
-  terminal = pkgs.${vars.terminal};
-in
+{ pkgs, unstable, vars, ... }:
 {
   imports =
     (import ../modules/desktops ++
@@ -37,6 +33,18 @@ in
 
 
   ### --- Custom options --- ###
+  custom.desktops.hyprland.enable = true;
+
+  custom.programs.alacritty.enable = true;
+  custom.programs.codium.enable = true;
+  custom.programs.kitty.enable = true;
+  custom.programs.wofi.enable = true;
+
+  custom.services.dunst.enable = true;
+  custom.services.syncthing.enable = true;
+  custom.services.virtualisation.enable = true;
+  custom.services.xdg.enable = true;
+
   custom.shells.zsh.enable = true;
   custom.shells.git.enable = true;
   custom.shells.scripts.powermenu.enable = true;
@@ -56,7 +64,7 @@ in
     extraGroups = [ "wheel" "video" "audio" "camera" "networkmanager" "lp" "scanner" "docker" ];
   };
 
-  networking.hostName = host.hostName;
+  networking.hostName = vars.hostname;
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Madrid";
@@ -98,9 +106,10 @@ in
 
   environment = {
     variables = {
-      TERMINAL = "${vars.terminal}";
-      EDITOR = "${vars.editor}";
-      VISUAL = "${vars.visualeditor}";
+      # TODO: Set these variables
+      # TERMINAL = "${vars.terminal}";
+      # EDITOR = "${vars.editor}";
+      # VISUAL = "${vars.visualeditor}";
     };
 
     systemPackages = with pkgs; [

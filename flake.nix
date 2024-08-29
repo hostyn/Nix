@@ -21,21 +21,13 @@
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, ... }: # Function telling flake which inputs to use
     let
-      # Variables Used In Flake
-      vars = {
-        user = "hostyn";
-        location = "$HOME/.setup";
-        terminal = "kitty";
-        editor = "nvim";
-        visualeditor = "codium";
-      };
       palette = (nix-colors.lib.schemeFromYAML "dracula" (builtins.readFile ./modules/theming/themes/dracula.yaml)).palette;
     in
     {
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager vars palette nix-colors; # Inherit inputs
+          inherit inputs nixpkgs nixpkgs-unstable home-manager palette nix-colors;
         }
       );
     };

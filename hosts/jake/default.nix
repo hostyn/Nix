@@ -11,6 +11,13 @@
       ./hardware-configuration.nix
     ];
 
+  ### --- Custom options --- ###
+  custom.desktops.hyprland.monitorsLayout = [
+    "eDP-1,1920x1080@60.06,0x0,1"
+  ];
+
+  ### --- Other options --- ###
+
   # Boot Options
   boot = {
     loader = {

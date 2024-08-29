@@ -5,6 +5,15 @@
     ./hardware-configuration.nix
   ];
 
+  ### --- Custom options --- ###
+  custom.desktops.hyprland.monitorsLayout = [
+    "HDMI-A-1,1920x1080@60,0x180,1"
+    "DP-1,2560x1440@164.80,1920x0,1"
+    "Unknown-1,disable"
+  ];
+
+  ### --- Other options --- ###
+
   # Boot Options
   boot = {
     loader = {

@@ -1,18 +1,23 @@
-{ pkgs, vars, palette, monitors, ... }:
+{ config, lib, pkgs, vars, ... }:
 
+let
+  cfg = config.custom.desktops.hyprland;
+in
 {
-  environment.systemPackages = with pkgs; [
-    hyprpaper
-  ];
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      hyprpaper
+    ];
 
-  home-manager.users.${vars.user} = {
-    # HYPRPAPER
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload =
-          [ "$HOME/.config/wallpapers/car.jpg" ];
-        wallpaper = builtins.map (x: x + ",$HOME/.config/wallpapers/car.jpg") monitors.list;
+    home-manager.users.${vars.user} = {
+      # HYPRPAPER
+      services.hyprpaper = {
+        enable = true;
+        settings = {
+          preload =
+            [ "$HOME/.config/wallpapers/car.jpg" ];
+          wallpaper = ",$HOME/.config/wallpapers/car.jpg";
+        };
       };
     };
   };

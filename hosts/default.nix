@@ -9,7 +9,7 @@
 #           └─ default.nix
 #
 
-{ inputs, nixpkgs, nixpkgs-unstable, home-manager, vars, palette, nix-colors, ... }:
+{ inputs, nixpkgs, nixpkgs-unstable, home-manager, palette, nix-colors, ... }:
 
 let
   system = "x86_64-linux";
@@ -30,19 +30,13 @@ in
   finn = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars palette nix-colors;
-      host = {
-        hostName = "finn";
-      };
-      monitors = {
-        list = [ "HDMI-A-1" "DP-1" ];
-        hyprland = [
-          "HDMI-A-1,1920x1080@60,0x180,1"
-          "DP-1,2560x1440@164.80,1920x0,1"
-          "Unknown-1,disable"
-        ];
+      inherit inputs system pkgs unstable palette nix-colors;
+      vars = {
+        hostname = "finn";
+        user = "hostyn";
       };
     };
+
     modules = [
       ./finn
       ./desktop.nix
@@ -60,17 +54,13 @@ in
   jake = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars palette nix-colors;
-      host = {
-        hostName = "jake";
-      };
-      monitors = {
-        list = [ "eDP-1" ];
-        hyprland = [
-          "eDP-1,1920x1080@60.06,0x0,1"
-        ];
+      inherit inputs system unstable palette nix-colors;
+      vars = {
+        hostname = "jake";
+        user = "hostyn";
       };
     };
+
     modules = [
       ./jake
       ./desktop.nix
@@ -89,10 +79,8 @@ in
     inherit system;
     specialArgs = {
       inherit inputs system unstable nix-colors;
-      host = {
-        hostName = "kube-1";
-      };
       vars = {
+        hostname = "kube-1";
         user = "serveradmin";
       };
     };

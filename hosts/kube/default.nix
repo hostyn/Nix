@@ -1,4 +1,4 @@
-{ config, pkgs, host, ... }:
+{ pkgs, vars, ... }:
 
 {
   imports =
@@ -9,7 +9,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
-  networking.hostName = host.hostName;
+  networking.hostName = vars.hostname;
 
   networking.networkmanager.enable = true;
 
