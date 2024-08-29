@@ -44,10 +44,6 @@
         history.ignoreSpace = true;
         history.share = true;
 
-        envExtra = ''
-          TERM=rxvt
-        '';
-
         shellAliases = {
           vi = "${pkgs.neovim}/bin/nvim";
           cat = "${pkgs.bat}/bin/bat";
@@ -65,6 +61,7 @@
           dig = "${pkgs.dogdns}/bin/dog";
           code = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret";
           rebuild = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
+          ssh = "kitten ssh";
         };
 
         plugins = [
