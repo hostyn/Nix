@@ -7,6 +7,8 @@
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.users.${vars.user} = {
     isNormalUser = true;
     description = "serveradmin";
