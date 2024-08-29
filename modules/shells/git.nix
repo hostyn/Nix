@@ -8,7 +8,7 @@ let
 in
 {
   options.custom.shells.git = {
-    enable = lib.mkDefault true;
+    enable = lib.mkEnableOption true;
   };
 
   config = lib.mkIf cfg.enable {
