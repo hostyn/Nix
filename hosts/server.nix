@@ -18,6 +18,12 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  networking.defaultGateway = { address = "192.168.1.1"; interface = "enp3s0"; };
+  networking.interfaces.ens18.ipv4.addresses = [{
+    address = vars.ipAddress;
+    prefixLength = 24;
+  }];
+
   users.users.${vars.user} = {
     isNormalUser = true;
     description = "serveradmin";
