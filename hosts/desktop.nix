@@ -35,6 +35,14 @@ in
       import ../modules/theming ++
       import ../modules/shells);
 
+
+  ### --- Custom options --- ###
+  shells.zsh.enable = true;
+  shells.scripts.powermenu.enable = true;
+
+
+  ### --- Other options --- ###
+
   # services.displayManager.sddm.enable = true;
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;

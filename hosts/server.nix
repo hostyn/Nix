@@ -4,10 +4,14 @@
   imports =
     (import ../modules/shells);
 
+  # Custom modules
+  shells.zsh.enable = true;
+
+
+  # Other modules
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
 
-  shells.zsh.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
