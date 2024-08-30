@@ -10,7 +10,7 @@
 
 
   ### --- Custom options --- ###
-  custom.services.k3s = true;
+  custom.services.k3s.enable = true;
 
   custom.shells.zsh.enable = true;
 
