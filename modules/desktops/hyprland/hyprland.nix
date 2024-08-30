@@ -50,7 +50,7 @@ in
               "$mod, W, killactive"
 
               # APPLICATION KEYS
-              "$mod, RETURN, exec, ${pkgs.kitty}"
+              "$mod, RETURN, exec, ${pkgs.kitty}/bin/kitty"
               "$mod, G, exec, ${pkgs.brave}/bin/brave --password-store=gnome-libsecret"
               "$mod, V, exec, ${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret"
               "$mod, M, exec, pidof ${pkgs.wofi}/bin/wofi || ${pkgs.wofi}/bin/wofi --show drun"

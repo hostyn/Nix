@@ -4,10 +4,9 @@ let
   cfg = config.custom.programs.kitty;
 in
 {
-  options.custom.programs.kitty =
-    {
-      enable = lib.mkEnableOption "Kitty";
-    };
+  options.custom.programs.kitty = {
+    enable = lib.mkEnableOption "Kitty";
+  };
 
   config = lib.mkIf cfg.enable {
 
@@ -15,6 +14,7 @@ in
       # TODO: Check kitty configuration - https://sw.kovidgoyal.net/kitty/conf.html
       programs.kitty = {
         enable = true;
+
         shellIntegration.enableZshIntegration = true;
         theme = "Dracula";
         font.name = "Mononoki Nerd Font Regular";
