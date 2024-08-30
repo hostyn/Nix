@@ -64,6 +64,7 @@ in
             code = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret";
             rebuild = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
             ssh = "kitten ssh";
+            k = "kubectl";
           };
 
           plugins = [
