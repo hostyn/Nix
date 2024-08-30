@@ -6,26 +6,14 @@
 
 
   ### --- Custom options --- ###
-  custom.shells.zsh.enable = true;
+  custom.services.k3s.enable = true;
 
+  custom.shells.zsh.enable = true;
 
   ### --- Other options --- ###
 
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
-
-  services.k3s = {
-    enable = true;
-    role = "server";
-    token = "awQ4VyY6bdJUGj1l";
-    clusterInit = true;
-    extraFlags = ''
-      --write-kubeconfig-mode "0644"
-      --disable servicelb
-      --disable traefik
-      --disable local-storage
-    '';
-  };
 
   programs.git.enable = true;
 
