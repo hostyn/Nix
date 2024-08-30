@@ -2,11 +2,15 @@
 
 {
   imports =
-    (import ../modules/shells);
+    (import ../modules/desktops ++
+      import ../modules/programs ++
+      import ../modules/services ++
+      import ../modules/theming ++
+      import ../modules/shells);
 
 
   ### --- Custom options --- ###
-  custom.services.k3s.enable = true;
+  custom.services.k3s = true;
 
   custom.shells.zsh.enable = true;
 
