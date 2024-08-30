@@ -63,6 +63,7 @@ in
           "redhat.telemetry.enabled" = false;
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nixd";
+          "git.confirmSync" = false;
 
           "[json]" = {
             "editor.defaultFormatter" = "vscode.json-language-features";
