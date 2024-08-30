@@ -1,6 +1,3 @@
-#
-#  Git
-#
 { config, lib, vars, ... }:
 
 let

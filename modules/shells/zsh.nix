@@ -1,7 +1,3 @@
-#
-#  Shell
-#
-
 { config, pkgs, lib, vars, ... }:
 
 let
@@ -19,7 +15,6 @@ in
 
     programs.zsh.enable = true;
 
-    # Shell tools
     environment.systemPackages = with pkgs; [
       bat
       bottom
@@ -34,9 +29,7 @@ in
       neovim
       unzip
       wget
-    ] ++
-    (with unstable; [
-    ]);
+    ];
 
     home-manager.users.${vars.user}.programs =
       {

@@ -6,7 +6,7 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # TODO: Label only update when there user input (keyboard or mouse)
+    # FIX: Label only update when there user input (keyboard or mouse)
     # https://github.com/hyprwm/hyprlock/issues/357
 
     home-manager.users.${vars.user} = {

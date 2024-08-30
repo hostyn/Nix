@@ -32,7 +32,6 @@ in
           # AUTO START
           exec-once = [
             "hyprpaper"
-            # "hypridle"
             "waybar"
             "udiskie -t"
             "hyprctl dispatch focusmonitor 1 && hyprctl dispatch focusworkspaceoncurrentmonitor 1"
@@ -100,7 +99,7 @@ in
 
               "$mod, F, togglefloating,"
             ] ++ (if lib.elem pkgs.brightnessctl config.environment.systemPackages then [
-              # BRIGHTNESS KEYS
+              # BRIGHTNESS KEYS - TODO: Make this a custom option
               ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
               ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
             ] else [ ]);

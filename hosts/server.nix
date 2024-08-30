@@ -1,4 +1,4 @@
-{ pkgs, unstable, inputs, vars, host, ... }:
+{ pkgs, vars, ... }:
 
 {
   imports =
@@ -32,9 +32,6 @@
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDuGzl7Kmz41kb/nYyVUBLICQoOXWWAibgeqH+RT0YdX ruben@martinezhostyn.com"
-    ];
-
-    packages = with pkgs; [
     ];
   };
 

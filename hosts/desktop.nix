@@ -49,12 +49,14 @@
   custom.shells.git.enable = true;
   custom.shells.scripts.powermenu.enable = true;
 
+  custom.theming.enable = true;
+  custom.theming.wallpapers.enable = true;
+
   ### --- Other options --- ###
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
 
-  # Keyring
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
   programs.seahorse.enable = true;
@@ -84,7 +86,6 @@
   };
 
   console = {
-    # font = "Lat2-Terminus16";
     keyMap = "es";
   };
 
@@ -145,9 +146,6 @@
   hardware.pulseaudio.enable = false;
 
   services = {
-    # printing = {
-    #   enable = true;
-    # };
     pipewire = {
       enable = true;
       alsa = {
@@ -177,7 +175,6 @@
     #   keep-derivations      = true
     # '';
   };
-  nixpkgs.config.allowUnfree = true;
 
   system = {
     # autoUpgrade = {

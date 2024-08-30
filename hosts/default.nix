@@ -4,12 +4,13 @@
 #  flake.nix
 #   └─ ./hosts
 #       ├─ default.nix *
-#       ├─ configuration.nix
-#       └─ ./<host>.nix
+#       ├─ desktop.nix      ->  Desktop configuration
+#       ├─ server.nix       ->  Server configuration
+#       └─ ./<host>.nix     ->  Host specific configuration
 #           └─ default.nix
 #
 
-{ inputs, nixpkgs, nixpkgs-unstable, home-manager, palette, nix-colors, ... }:
+{ inputs, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, ... }:
 
 let
   system = "x86_64-linux";
@@ -25,6 +26,8 @@ let
   };
 
   lib = nixpkgs.lib;
+
+  palette = (nix-colors.lib.schemeFromYAML "dracula" (builtins.readFile ../modules/theming/themes/dracula.yaml)).palette;
 in
 {
   finn = lib.nixosSystem {
@@ -51,10 +54,11 @@ in
     ];
   };
 
+
   jake = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable palette nix-colors;
+      inherit inputs system pkgs unstable palette nix-colors;
       vars = {
         hostname = "jake";
         user = "hostyn";
@@ -75,10 +79,11 @@ in
     ];
   };
 
+
   kube-1 = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable nix-colors;
+      inherit inputs system unstable;
       vars = {
         hostname = "kube-1";
         user = "serveradmin";
