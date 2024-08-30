@@ -27,6 +27,7 @@ in
       killall
       nano
       neovim
+      pwgen
       unzip
       wget
     ];
