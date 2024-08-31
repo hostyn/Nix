@@ -19,6 +19,7 @@ in
         "--disable servicelb"
         "--disable traefik"
         "--disable local-storage"
+        "--tls-san 192.168.1.60"
       ];
     };
   };
