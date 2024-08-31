@@ -27,7 +27,7 @@
   networking.nameservers = [ "192.168.1.240" "1.1.1.1" ];
   networking.interfaces.ens18.ipv4.addresses = [{
     address = vars.ipAddress;
-    prefixLength = 32;
+    prefixLength = 24;
   }];
 
   users.users.${vars.user} = {
