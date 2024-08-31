@@ -87,7 +87,7 @@ in
       vars = {
         hostname = "kube-1";
         user = "serveradmin";
-        ipAddress = "192.168.1.50";
+        ipAddress = "192.168.0.100";
       };
     };
 
