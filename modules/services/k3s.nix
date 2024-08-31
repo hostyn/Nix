@@ -18,7 +18,7 @@ in
       role = "server";
       token = "awQ4VyY6bdJUGj1l";
       clusterInit = true;
-      serverAddr = "https://192.168.0.200:6443";
+      # serverAddr = "https://192.168.0.200:6443";
       extraFlags = toString [
         "--write-kubeconfig-mode \"0644\""
         "--disable servicelb"
