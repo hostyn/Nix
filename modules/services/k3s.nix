@@ -12,7 +12,7 @@ in
     networking.firewall.allowedTCPPorts = [ 6443 2379 2380 ];
     networking.firewall.allowedUDPPorts = [ 8472 ];
 
-    # You will need to add kube-vip manually https://kube-vip.io/docs/usage/k3s/
+    # You will need to manually add kube-vip https://kube-vip.io/docs/usage/k3s/
     services.k3s = {
       enable = true;
       role = "server";

@@ -133,8 +133,11 @@
       nixd
       cifs-utils
       nfs-utils
+      remmina
+      gparted
     ] ++
     (with unstable; [
+      moonlight-qt
     ]);
   };
 
@@ -160,20 +163,13 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      # auto-optimise-store = true;
+      auto-optimise-store = true;
     };
-    # gc = {
-    #   automatic = true;
-    #   dates = "weekly";
-    #   options = "--delete-older-than 2d";
-    # };
-    # package = pkgs.nixVersions.unstable;
-    # registry.nixpkgs.flake = inputs.nixpkgs;
-    # extraOptions = ''
-    #   experimental-features = nix-command flakes
-    #   keep-outputs          = true
-    #   keep-derivations      = true
-    # '';
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
   system = {

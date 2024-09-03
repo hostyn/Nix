@@ -30,6 +30,7 @@ in
       pwgen
       unzip
       wget
+      pciutils
     ];
 
     home-manager.users.${vars.user}.programs =
