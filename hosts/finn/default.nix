@@ -1,9 +1,28 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vars, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  sops.secrets."smb/username" = { };
+  sops.secrets."smb/password" = { };
+
+  sops.templates."smb_credentials".content = ''
+    username=${config.sops.placeholder."smb/username"}
+    password=${config.sops.placeholder."smb/password"}
+  '';
+
+  fileSystems."/home/${vars.user}/NAS" = {
+    device = "//192.168.1.100/hostyn";
+    fsType = "cifs";
+    options =
+      let
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+        permissions = "uid=1000,gid=1000,dir_mode=0755,file_mode=0755";
+      in
+      [ "${automount_opts},${permissions},credentials=${config.sops.templates."smb_credentials".path}" ];
+  };
 
   ### --- Custom options --- ###
   custom.desktops.hyprland.monitorsLayout = [

@@ -33,8 +33,7 @@
 
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/hostyn/.config/sops/age/keys.txt";
-  sops.secrets.smb = { };
+  sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
 
   ### --- Custom options --- ###
   custom.desktops.hyprland.enable = true;
