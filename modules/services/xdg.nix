@@ -30,11 +30,11 @@ in
             "x-scheme-handler/about" = [ "brave-browser.desktop" "firefox.desktop" ];
             "x-scheme-handler/unknown" = [ "brave-browser.desktop" "firefox.desktop" ];
             # "x-scheme-handler/mailto" = [ "gmail.desktop" ];org.kde.ark.desktop
-            "audio/mp3" = "mpv.desktop";
-            "audio/x-matroska" = "mpv.desktop";
-            "video/webm" = "mpv.desktop";
-            "video/mp4" = "mpv.desktop";
-            "video/x-matroska" = "mpv.desktop";
+            "audio/mp3" = "vlc.desktop";
+            "audio/x-matroska" = "vlc.desktop";
+            "video/webm" = "vlc.desktop";
+            "video/mp4" = "vlc.desktop";
+            "video/x-matroska" = "vlc.desktop";
             "inode/directory" = "pcmanfm.desktop";
           };
         };
