@@ -8,20 +8,21 @@
       nix-colors.url = "github:misterio77/nix-colors"; # Nix Colors
       grub2-themes.url = "github:vinceliuice/grub2-themes"; # Grub themes
 
-      # Home Manager
-      home-manager = {
-        url = "github:nix-community/home-manager/release-24.05";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+      # Sops Nix
+      sops-nix.url = "github:Mic92/sops-nix";
+      sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+      # Home Manager
+      home-manager.url = "github:nix-community/home-manager/release-24.05";
+      home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, nix-colors, ... }:
+  outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, nix-colors, sops-nix, ... }:
     {
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager nix-colors;
+          inherit inputs nixpkgs nixpkgs-unstable home-manager nix-colors sops-nix;
         }
       );
     };

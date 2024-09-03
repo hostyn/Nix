@@ -31,6 +31,7 @@ in
       unzip
       wget
       pciutils
+      sops
     ];
 
     home-manager.users.${vars.user}.programs =

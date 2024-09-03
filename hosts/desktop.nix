@@ -31,6 +31,10 @@
       import ../modules/theming ++
       import ../modules/shells);
 
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/hostyn/.config/sops/age/keys.txt";
+  sops.secrets.smb = { };
 
   ### --- Custom options --- ###
   custom.desktops.hyprland.enable = true;

@@ -10,7 +10,7 @@
 #           └─ default.nix
 #
 
-{ inputs, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, ... }:
+{ inputs, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, sops-nix, ... }:
 
 let
   system = "x86_64-linux";
@@ -51,9 +51,9 @@ in
       }
 
       inputs.grub2-themes.nixosModules.default
+      sops-nix.nixosModules.sops
     ];
   };
-
 
   jake = lib.nixosSystem {
     inherit system;

@@ -1,0 +1,8 @@
+keys:
+  - &finn age17h6sar3wheca4rmgpxp59q2xczyzsmdkkg5wyxjvtvj2kujn2y9stwutra
+
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+      - age:
+          - *finn
