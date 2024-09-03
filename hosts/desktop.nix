@@ -135,6 +135,8 @@
       nfs-utils
       remmina
       gparted
+      obs-studio
+      vlc
     ] ++
     (with unstable; [
       moonlight-qt
