@@ -19,7 +19,19 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
 
-  sops.secrets.hashedPassword = { };
+  sops.secrets.hashedPassword.neededForUsers = true;
+
+  users.mutableUsers = false;
+  users.users.${vars.user} = {
+    isNormalUser = true;
+    description = "serveradmin";
+    extraGroups = [ "networkmanager" "wheel" ];
+    hashedPasswordFile = config.sops.secrets.hashedPassword.path;
+
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDuGzl7Kmz41kb/nYyVUBLICQoOXWWAibgeqH+RT0YdX ruben@martinezhostyn.com"
+    ];
+  };
 
   services.openssh.enable = true;
   services.qemuGuest.enable = true;
@@ -34,18 +46,6 @@
     address = vars.ipAddress;
     prefixLength = 16;
   }];
-
-  users.mutableUsers = false;
-  users.users.${vars.user} = {
-    isNormalUser = true;
-    description = "serveradmin";
-    extraGroups = [ "networkmanager" "wheel" ];
-    hashedPasswordFile = config.sops.secrets.hashedPassword.path;
-
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDuGzl7Kmz41kb/nYyVUBLICQoOXWWAibgeqH+RT0YdX ruben@martinezhostyn.com"
-    ];
-  };
 
   system.stateVersion = "24.05";
 

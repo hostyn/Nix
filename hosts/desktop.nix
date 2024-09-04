@@ -22,7 +22,7 @@
 #           └─ default.nix
 #
 
-{ pkgs, unstable, vars, ... }:
+{ config, pkgs, unstable, vars, ... }:
 {
   imports =
     (import ../modules/desktops ++
@@ -56,6 +56,18 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
 
+  sops.secrets.hashedPassword = {
+    sopsFile = ../secrets/server.yaml;
+    neededForUsers = true;
+  };
+
+  users.mutableUsers = false;
+  users.users.${vars.user} = {
+    isNormalUser = true;
+    hashedPasswordFile = config.sops.secrets.hashedPassword.path;
+    extraGroups = [ "wheel" "video" "audio" "camera" "networkmanager" "lp" "scanner" "docker" ];
+  };
+
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
@@ -63,11 +75,6 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
   programs.seahorse.enable = true;
-
-  users.users.${vars.user} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "video" "audio" "camera" "networkmanager" "lp" "scanner" "docker" ];
-  };
 
   networking.hostName = vars.hostname;
   networking.networkmanager.enable = true;
