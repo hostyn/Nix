@@ -17,7 +17,7 @@
   ### --- Other options --- ###
   sops.defaultSopsFile = ../secrets/server.yaml;
   sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/${vars.user}/.config/sops/keys.txt";
+  sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
   sops.age.generateKey = true;
 
   sops.secrets.hashedPassword = { };
