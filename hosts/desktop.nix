@@ -52,7 +52,7 @@
   custom.theming.wallpapers.enable = true;
 
   ### --- Other options --- ###
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFile = ../secrets/desktop.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.sshKeyPaths = [ "/home/${vars.user}/.ssh/id_ed25519" ];
   sops.age.keyFile = "/home/${vars.user}/.config/sops/keys.txt";

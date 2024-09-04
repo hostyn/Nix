@@ -32,6 +32,7 @@ in
       wget
       pciutils
       sops
+      age
     ];
 
     home-manager.users.${vars.user}.programs =

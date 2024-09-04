@@ -1,11 +1,1 @@
-Generate sops key based on ssh key
-
-```
-nix run nixpkgs#ssh-to-age -- -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt`
-```
-
-Generate pulic key
-
-```
-nix shell nixpkgs#age -c age-keygen -y ~/.config/sops/age/keys.txt
-```
+[Sops-nix](https://github.com/Mic92/sops-nix/tree/master?tab=readme-ov-file#usage-example)
