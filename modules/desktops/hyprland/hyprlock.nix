@@ -1,4 +1,4 @@
-{ config, lib, vars, palette, nix-colors, ... }:
+{ inputs, config, lib, vars, palette, ... }:
 
 
 let
@@ -38,9 +38,9 @@ in
             position = "0, -64";
             rounding = 5;
             outline_thickness = 0;
-            inner_color = "rgba(${nix-colors.lib.conversions.hexToRGBString ", " palette.base00}, 0.5)";
-            font_color = "rgba(${nix-colors.lib.conversions.hexToRGBString ", " palette.base07}, 0.5)";
-            check_color = "rgba(${nix-colors.lib.conversions.hexToRGBString ", " palette.base0E}, 0.5)";
+            inner_color = "rgba(${inputs.nix-colors.lib.conversions.hexToRGBString ", " palette.base00}, 0.5)";
+            font_color = "rgba(${inputs.nix-colors.lib.conversions.hexToRGBString ", " palette.base07}, 0.5)";
+            check_color = "rgba(${inputs.nix-colors.lib.conversions.hexToRGBString ", " palette.base0E}, 0.5)";
             fail_color = "rgba(207, 53, 46, 0.5)";
             placeholder_text = "";
           };

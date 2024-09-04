@@ -31,10 +31,6 @@
       import ../modules/theming ++
       import ../modules/shells);
 
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
-
   ### --- Custom options --- ###
   custom.desktops.hyprland.enable = true;
 
@@ -56,6 +52,12 @@
   custom.theming.wallpapers.enable = true;
 
   ### --- Other options --- ###
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.sshKeyPaths = [ "/home/${vars.user}/.ssh/id_ed25519" ];
+  sops.age.keyFile = "/home/${vars.user}/.config/sops/keys.txt";
+  sops.age.generateKey = true;
+
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
@@ -137,7 +139,6 @@
       cifs-utils
       nfs-utils
       remmina
-      gparted
       obs-studio
       vlc
     ] ++

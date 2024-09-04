@@ -17,12 +17,11 @@
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = inputs @ { nixpkgs, nixpkgs-unstable, home-manager, nix-colors, sops-nix, ... }:
+  outputs = inputs @ { ... }:
     {
       nixosConfigurations = (
         import ./hosts {
-          inherit (nixpkgs) lib;
-          inherit inputs nixpkgs nixpkgs-unstable home-manager nix-colors sops-nix;
+          inherit inputs;
         }
       );
     };

@@ -10,30 +10,30 @@
 #           └─ default.nix
 #
 
-{ inputs, nixpkgs, nixpkgs-unstable, home-manager, nix-colors, sops-nix, ... }:
+{ inputs, ... }:
 
 let
   system = "x86_64-linux";
 
-  pkgs = import nixpkgs {
+  pkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
   };
 
-  unstable = import nixpkgs-unstable {
+  unstable = import inputs.nixpkgs-unstable {
     inherit system;
     config.allowUnfree = true;
   };
 
-  lib = nixpkgs.lib;
+  lib = inputs.nixpkgs.lib;
 
-  palette = (nix-colors.lib.schemeFromYAML "dracula" (builtins.readFile ../modules/theming/themes/dracula.yaml)).palette;
+  palette = (inputs.nix-colors.lib.schemeFromYAML "dracula" (builtins.readFile ../modules/theming/themes/dracula.yaml)).palette;
 in
 {
   finn = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system pkgs unstable palette nix-colors;
+      inherit inputs system pkgs unstable palette;
       vars = {
         hostname = "finn";
         user = "hostyn";
@@ -44,21 +44,21 @@ in
       ./finn
       ./desktop.nix
 
-      home-manager.nixosModules.home-manager
+      inputs.home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
 
       inputs.grub2-themes.nixosModules.default
-      sops-nix.nixosModules.sops
+      inputs.sops-nix.nixosModules.sops
     ];
   };
 
   jake = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system pkgs unstable palette nix-colors;
+      inherit inputs system pkgs unstable palette;
       vars = {
         hostname = "jake";
         user = "hostyn";
@@ -69,7 +69,7 @@ in
       ./jake
       ./desktop.nix
 
-      home-manager.nixosModules.home-manager
+      inputs.home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
@@ -95,11 +95,12 @@ in
       ./kube
       ./server.nix
 
-      home-manager.nixosModules.home-manager
+      inputs.home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
+      inputs.sops-nix.nixosModules.sops
     ];
   };
 }
