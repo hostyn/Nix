@@ -55,7 +55,6 @@
   sops.defaultSopsFile = ../secrets/desktop.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
-  sops.age.generateKey = true;
 
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
