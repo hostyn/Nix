@@ -54,8 +54,7 @@
   ### --- Other options --- ###
   sops.defaultSopsFile = ../secrets/desktop.yaml;
   sops.defaultSopsFormat = "yaml";
-  sops.age.sshKeyPaths = [ "/home/${vars.user}/.ssh/id_ed25519" ];
-  sops.age.keyFile = "/home/${vars.user}/.config/sops/keys.txt";
+  sops.age.keyFile = "/home/${vars.user}/.config/sops/age/keys.txt";
   sops.age.generateKey = true;
 
   services.xserver.enable = true;
