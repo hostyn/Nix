@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ config, pkgs, unstable, vars, ... }:
 
 {
   imports = [
@@ -73,6 +73,6 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = unstable.linuxKernel.packages.linux_6_6.nvidia_x11;
   };
 }
