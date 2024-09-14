@@ -93,40 +93,46 @@ in
 
         # Extensions
         extensions = with pkgs.vscode-extensions; [
+          # Nix
           bbenoist.nix
-          bradlc.vscode-tailwindcss
+          jnoortheen.nix-ide
+
+          # Theming
+          github.github-vscode-theme
+          pkief.material-icon-theme
+
+          # Node
           dbaeumer.vscode-eslint
-          # dsznajder.es7-react-js-snippets
-          eamodio.gitlens
           esbenp.prettier-vscode
+          bradlc.vscode-tailwindcss
+          prisma.prisma
+          usernamehw.errorlens
+
+          # Git / GitHub
+          eamodio.gitlens
+          mhutchie.git-graph
+          github.vscode-github-actions
+
+          # Copilot
           github.copilot
           github.copilot-chat
-          github.github-vscode-theme
-          github.vscode-github-actions
-          jnoortheen.nix-ide
-          # jock.svg
-          mhutchie.git-graph
-          ms-azuretools.vscode-docker
-          ms-kubernetes-tools.vscode-kubernetes-tools
+
+          # Python  
           ms-python.black-formatter
           ms-python.debugpy
           ms-python.isort
           ms-python.python
-          # ms-vscode-remote.remote-containers
-          # ms-vscode-remote.remote-ssh
-          # ms-vscode-remote.remote-ssh-edit
+
+          # Astro
+          unifiedjs.vscode-mdx
+          astro-build.astro-vscode
+
+          # Other
+          ms-azuretools.vscode-docker
+          ms-kubernetes-tools.vscode-kubernetes-tools
           ms-vscode.live-server
-          # ms-vscode.remote-explorer
-          # orta.vscode-jest
-          # pflannery.vscode-versionlens
-          pkief.material-icon-theme
-          prisma.prisma
           redhat.vscode-yaml
-          # styled-components.vscode-styled-components
-          # toba.vsfire
           tomoki1207.pdf
-          usernamehw.errorlens
-          jnoortheen.nix-ide
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "vscode-conventional-commits";
