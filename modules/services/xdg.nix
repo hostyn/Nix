@@ -70,6 +70,23 @@ in
             };
           };
 
+          code = lib.mkIf (lib.elem pkgs.vscode config.environment.systemPackages) {
+            categories = [ "Utility" "TextEditor" "Development" "IDE" ];
+            comment = "Code Editing. Redefined.";
+            exec = "${pkgs.vscode}/bin/codium --password-store=gnome-libsecret %F";
+            genericName = "Text Editor";
+            icon = "vscode";
+            mimeType = [ "text/plain" "inode/directory" ];
+            name = "VSCode";
+            type = "Application";
+            settings = {
+              Keywords = "vscode";
+              StartupWMClass = "vscode";
+              Version = "1.4";
+              StartupNotify = "true";
+            };
+          };
+
           brave-browser = lib.mkIf (lib.elem pkgs.brave config.environment.systemPackages) {
             name = "Brave Web Browser";
             genericName = "Web Browser";

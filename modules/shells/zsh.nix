@@ -64,7 +64,7 @@ in
             top = "${pkgs.glances}/bin/galnces";
             htop = "${pkgs.bottom}/bin/btm";
             dig = "${pkgs.dogdns}/bin/dog";
-            code = "${pkgs.vscodium}/bin/codium --password-store=gnome-libsecret";
+            code = "${pkgs.vscode}/bin/code --password-store=gnome-libsecret";
             rebuild = "sudo nixos-rebuild switch --flake ~/NixOS#$HOST";
             ssh = "kitten ssh";
             k = "kubectl";

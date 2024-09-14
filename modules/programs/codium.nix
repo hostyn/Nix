@@ -12,7 +12,7 @@ in
     home-manager.users.${vars.user} = {
       programs.vscode = {
         enable = true;
-        package = pkgs.vscodium;
+        # package = pkgs.vscodium;
 
         # User settings
         userSettings = {
